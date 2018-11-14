@@ -16,6 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SecondActivity"
+            android:parentActivityName=".MainActivity">
+
+        </activity>
+        <activity android:name=".ThirdActivity"
+            android:parentActivityName=".SecondActivity">
+        </activity>
     </application>
 
 </manifest>
