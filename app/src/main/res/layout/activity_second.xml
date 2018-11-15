@@ -6,6 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".SecondActivity">
 
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rlo_topHalf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0">
+
+            <TextView
+                android:id="@+id/tv_valueTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:text="Estimated Maximum Profit:"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/et_maxProfit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_valueTitle"
+                android:layout_centerHorizontal="true"
+                android:hint="Profit after calculation" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/iv_companyLogo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/Lynx"
+                android:layout_marginLeft="16dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/iv_companyLogo"
+                android:layout_marginLeft="8dp"
+                android:text="Lynx Asset Management"/>
+        </RelativeLayout>
+    </android.support.v7.widget.LinearLayoutCompat>
 
     <Button
         android:id="@+id/btnTest2"
