@@ -87,6 +87,7 @@
         android:layout_marginEnd="148dp"
         android:layout_marginRight="148dp"
         android:layout_marginBottom="58dp"
+        android:onClick="moveNext"
         android:text="@string/check_possible_profits"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
