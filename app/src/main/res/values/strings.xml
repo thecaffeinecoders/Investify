@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Investify</string>
+    <string name="investify">Investify</string>
+    <string name="amount_you_want_to_invest">Amount you want to invest</string>
+    <string name="check_possible_profits">Check possible profits</string>
+
 </resources>

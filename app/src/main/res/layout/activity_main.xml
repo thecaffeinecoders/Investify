@@ -4,21 +4,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="163dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginLeft="128dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="127dp"
+        android:layout_marginRight="127dp"
+        android:layout_marginBottom="179dp"
+        app:layout_constraintBottom_toTopOf="@+id/teAmountEnteredToInvest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        app:srcCompat="@drawable/templogo"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tvAppName"
+        android:layout_width="272dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/investify"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="50sp"
+        app:fontFamily="serif"
+        app:layout_constraintBottom_toTopOf="@+id/tvAskAmountToInvest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
-    <Button
-        android:id="@+id/btnTest1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="moveNext"
-        android:text="Move to 2nd Activity"
+    <TextView
+        android:id="@+id/tvAskAmountToInvest"
+        android:layout_width="268dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginBottom="184dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/amount_you_want_to_invest"
+        android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/teAmountEnteredToInvest"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginLeft="85dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginRight="84dp"
+        android:layout_marginBottom="124dp"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/btnConfirmAmountEnteredToInvest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="148dp"
+        android:layout_marginLeft="148dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginRight="148dp"
+        android:layout_marginBottom="58dp"
+        android:text="@string/check_possible_profits"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 </android.support.constraint.ConstraintLayout>
