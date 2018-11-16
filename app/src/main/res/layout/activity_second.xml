@@ -27,13 +27,16 @@
                 android:text="Estimated Maximum Profit:"
                 android:textSize="20dp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/et_maxProfit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_valueTitle"
                 android:layout_centerHorizontal="true"
-                android:hint="Profit after calculation" />
+                android:text="Profit after calculation"
+                android:textSize="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
 
         </RelativeLayout>
 
