@@ -5,14 +5,38 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class ThirdActivity extends AppCompatActivity {
+
+    ArrayList<Integer> source = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
+        
+        fillSpinnerData();
+
+
+        final Spinner spin = (Spinner) findViewById(R.id.spinNumber);
+
+
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, source);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(aa);
+
+        
+    }
+
+    private void fillSpinnerData() {
+        source.add(1);
+        source.add(3);
+        source.add(5);
     }
 
     //To activate the menu on this activity
