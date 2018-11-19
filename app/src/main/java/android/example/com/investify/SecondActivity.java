@@ -25,6 +25,7 @@ public class SecondActivity extends AppCompatActivity {
         double intercept = simpleRegression.getIntercept();
         double slope = simpleRegression.getSlope();
         double sig = simpleRegression.getSignificance();
+        //
 
 
     }
