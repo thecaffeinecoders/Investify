@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
@@ -18,15 +19,9 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        double [][]value = {{1,-1.96},{2,4.61},{3,-3.71},{4,-3.32},{5,-2.37f},{6,-6.94},{7,2.37},{8,5.07},{9,-4.45},{10,5.90},{11,0.36},{12,-0.02}};
-
-        SimpleRegression simpleRegression = new SimpleRegression();
-        simpleRegression.addData(value);
-        double intercept = simpleRegression.getIntercept();
-        double slope = simpleRegression.getSlope();
-        double sig = simpleRegression.getSignificance();
-
-
+        double revenue = getIntent().getDoubleExtra("Revenue",0);
+        TextView tvRevenue = (TextView) findViewById(R.id.et_maxProfit);
+        tvRevenue.setText(String.valueOf(revenue));
     }
 
 
