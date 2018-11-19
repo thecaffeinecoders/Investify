@@ -5,13 +5,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+
+import org.apache.commons.math3.stat.regression.SimpleRegression;
 
 public class MainActivity extends AppCompatActivity {
+
+    double intercept;
+    double slope;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        double [][]value = {{1,-1.96},{2,4.61},{3,-3.71},{4,-3.32},{5,-2.37f},{6,-6.94},{7,2.37},{8,5.07},{9,-4.45},{10,5.90},{11,0.36},{12,-0.02}};
+
+        SimpleRegression simpleRegression = new SimpleRegression();
+        simpleRegression.addData(value);
+        this.intercept = simpleRegression.getIntercept();
+        this.slope = simpleRegression.getSlope();
     }
 
     // A temporary method to move to next activity
@@ -21,6 +34,31 @@ public class MainActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
 
-        startActivity(new Intent(this,SecondActivity.class));
+        Intent intent = new Intent(this,SecondActivity.class);
+        intent.putExtra("Revenue", revenue());
+        startActivity(intent);
+    }
+
+    /**
+     * Takes value user inputs for computational use
+     * @param view Takes in String from specified View
+     * @return Integer value
+     */
+    private double readPrincipal(View view) {
+        try {
+            EditText input = (EditText) findViewById(R.id.teAmountEnteredToInvest);
+            String readInput = input.getText().toString();
+            double principal = Integer.parseInt(readInput);
+            return principal;
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
+    public double revenue(){
+        double revenue;
+        double principal = readPrincipal(findViewById(R.id.teAmountEnteredToInvest));
+        revenue = (principal/100) * ((12*slope)+intercept+100);
+        return revenue;
     }
 }
