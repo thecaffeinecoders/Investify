@@ -8,27 +8,78 @@
     android:orientation="vertical"
     tools:layout_editor_absoluteY="81dp"
     >
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight=".60"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
         android:orientation="horizontal">
 
-        <SeekBar
-            android:id="@+id/seekBar"
-            android:layout_width="220dp"
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="300dp"
-            android:layout_marginEnd="300dp"
-            android:layout_marginLeft="200dp"
-            android:layout_marginRight="100dp"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="275dp">
+            app:srcCompat="@drawable/lynx" />
 
-        </SeekBar>
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:hint="Company Name"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal">
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph"
+            android:layout_width="match_parent"
+            android:layout_height="200dip" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:orientation="horizontal">
+
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:id="@+id/rgYearChoice"
+            >
+
+            <RadioButton
+                android:id="@+id/rbOneYear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1 Year" />
+
+            <RadioButton
+                android:id="@+id/rbThreeYear"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="3 Years" />
+
+            <RadioButton
+                android:id="@+id/rbFiveYear"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="5 Years" />
+        </RadioGroup>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
