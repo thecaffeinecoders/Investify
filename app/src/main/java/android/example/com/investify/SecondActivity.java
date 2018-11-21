@@ -19,9 +19,10 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        double revenue = getIntent().getDoubleExtra("Revenue",0);
+        int revenue = (int) getIntent().getDoubleExtra("Revenue",0);
+        int amount = (int) getIntent().getDoubleExtra("Amount",0);
         TextView tvRevenue = (TextView) findViewById(R.id.et_maxProfit);
-        tvRevenue.setText(String.valueOf(revenue));
+        tvRevenue.setText("If you invest " + amount + " your estimate profit will be "+String.valueOf(revenue-amount));
     }
 
 

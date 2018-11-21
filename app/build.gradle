@@ -26,5 +26,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.jjoe64:graphview:4.2.2'
-    compile 'org.apache.commons:commons-math3:3.6.1'
+    api 'org.apache.commons:commons-math3:3.6.1'
 }
