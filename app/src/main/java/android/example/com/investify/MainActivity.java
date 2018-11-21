@@ -34,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
 
+        double amount = readPrincipal(findViewById(R.id.teAmountEnteredToInvest));
         Intent intent = new Intent(this,SecondActivity.class);
+        intent.putExtra("Amount", amount);
         intent.putExtra("Revenue", revenue());
         startActivity(intent);
     }
