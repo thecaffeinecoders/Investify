@@ -42,7 +42,7 @@ public class SecondActivity extends AppCompatActivity {
         int amount = (int) getIntent().getDoubleExtra("Amount",0);
         TextView tvRevenue = (TextView) findViewById(R.id.et_maxProfit);
 
-        tvRevenue.setText(String.valueOf(revenue));
+        //tvRevenue.setText(String.valueOf(revenue));
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -66,7 +66,7 @@ public class SecondActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-        int x = 0;
+       // int x = 0;
 
         tvRevenue.setText("If you invest " + amount + " your estimate profit will be "+String.valueOf(revenue-amount));
 
