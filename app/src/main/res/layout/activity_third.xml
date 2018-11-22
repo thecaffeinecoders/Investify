@@ -6,8 +6,25 @@
     android:layout_height="fill_parent"
     tools:context=".ThirdActivity"
     android:orientation="vertical"
-    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteY="88dp"
     >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Company performance chart"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="italic"
+             />
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="47dp"
@@ -40,6 +57,7 @@
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph"
             android:layout_width="match_parent"
+            android:contentDescription="@string/chart_desc"
             android:layout_height="200dip" />
 
 
@@ -82,111 +100,147 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvProfitDesc"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Estimated Profit Calculation for Selected Company"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvYear"
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:layout_above="@+id/spinNumber"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="36dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="99dp"
+            android:layout_marginRight="99dp"
+            android:layout_marginBottom="14dp"
+            android:layout_toStartOf="@+id/tvEstimate"
+            android:layout_toLeftOf="@+id/tvEstimate"
+            android:gravity="center"
+            android:text="@string/year"
+
+            android:textSize="20sp"
+
+            android:textStyle="bold">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvEstimate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_above="@+id/tvEstimatedProfit"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="68dp"
+            android:layout_marginRight="68dp"
+            android:layout_marginBottom="11dp"
+            android:text="@string/estimated_profit"
 
-            <TextView
-                android:id="@+id/tvYear"
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginStart="30dp"
-                android:gravity="left"
-                android:text="@string/year"
-                android:textStyle="bold">
+            android:textSize="20sp"
+            android:textStyle="bold">
 
-            </TextView>
+        </TextView>
 
-            <TextView
-                android:id="@+id/tvEstimate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="60dp"
-                android:layout_marginStart="20dp"
-                android:gravity="center_horizontal"
-                android:text="@string/estimated_profit"
-                android:textStyle="bold">
-
-            </TextView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/spinNumber"
+            android:layout_width="73dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <Spinner
-                android:id="@+id/spinNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="60dp"
-                android:layout_marginStart="30dp"
-                android:gravity="left"></Spinner>
+            android:layout_above="@+id/tvCompDesc"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="51dp"
+            android:layout_marginLeft="51dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginRight="64dp"
+            android:layout_marginBottom="13dp"
+            android:layout_toStartOf="@+id/tvEstimatedProfit"
+            android:layout_toLeftOf="@+id/tvEstimatedProfit"
+            android:layout_weight="1"
+            android:gravity="right"></Spinner>
 
 
-            <TextView
-                android:id="@+id/tvEstimatedProfit"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:hint="Estimate_profit"
-                android:textStyle="bold"></TextView>
+        <TextView
+            android:id="@+id/tvEstimatedProfit"
 
-        </LinearLayout>
+            android:layout_width="153dp"
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tvCompDesc"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="43dp"
+            android:layout_marginRight="43dp"
+            android:layout_marginBottom="21dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:hint="Estimate_profit"
+            android:textStyle="bold"></TextView>
 
-            <TextView
-                android:id="@+id/tvCompDesc"
-                android:layout_width="196dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginEnd="100dp"
-                android:layout_marginLeft="100dp"
-                android:layout_marginRight="100dp"
-                android:layout_marginStart="100dp"
-                android:gravity="center"
-                android:hint="Company Description"
-                android:textStyle="bold">
 
-            </TextView>
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tvCompDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_above="@+id/btnInvest"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="11dp"
+            android:layout_marginLeft="11dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginBottom="0dp"
+            android:gravity="center"
+            android:hint="Company Description"
+            android:inputType="textMultiLine"
+            android:scrollbars="horizontal"
+            android:textStyle="bold">
+
+        </TextView>
+
 
         <Button
             android:id="@+id/btnInvest"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="100dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginRight="60dp"
-            android:layout_marginStart="120dp"
+            android:layout_height="41dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="137dp"
+            android:layout_marginLeft="137dp"
+            android:layout_marginEnd="159dp"
+            android:layout_marginRight="159dp"
+            android:layout_marginBottom="0dp"
             android:gravity="center"
             android:hint="Invest" />
 
-    </LinearLayout>
+    </RelativeLayout>
+
 </LinearLayout>

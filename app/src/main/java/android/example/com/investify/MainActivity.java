@@ -3,9 +3,13 @@ package android.example.com.investify;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 
@@ -39,7 +43,12 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("Amount", amount);
         intent.putExtra("Revenue", revenue());
         startActivity(intent);
+
+        //To activate the menu on this activity
+
     }
+
+
 
     /**
      * Takes value user inputs for computational use
