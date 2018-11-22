@@ -41,7 +41,7 @@ public class SecondActivity extends AppCompatActivity {
         int revenue = (int) getIntent().getDoubleExtra("Revenue",0);
         int amount = (int) getIntent().getDoubleExtra("Amount",0);
         TextView tvRevenue = (TextView) findViewById(R.id.et_maxProfit);
-<<<<<<< HEAD
+
         tvRevenue.setText(String.valueOf(revenue));
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -67,50 +67,16 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
         int x = 0;
-=======
+
         tvRevenue.setText("If you invest " + amount + " your estimate profit will be "+String.valueOf(revenue-amount));
->>>>>>> origin/master
+
     }
 
     protected void onStart() {
         super.onStart();
-        //initImageBitmaps();
 
     }
-
-   /* private void initImageBitmaps(){
-
-        companyLogoList.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        companyNameList.add("Havasu Falls");
-
-        companyLogoList.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        companyNameList.add("Trondheim");
-
-        companyLogoList.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-        companyNameList.add("Portugal");
-
-        companyLogoList.add("https://i.redd.it/j6myfqglup501.jpg");
-        companyNameList.add("Rocky Mountain National Park");
-
-
-        companyLogoList.add("https://i.redd.it/0h2gm1ix6p501.jpg");
-        companyNameList.add("Mahahual");
-
-        companyLogoList.add("https://i.redd.it/k98uzl68eh501.jpg");
-        companyNameList.add("Frozen Lake");
-
-
-        companyLogoList.add("https://i.redd.it/glin0nwndo501.jpg");
-        companyNameList.add("White Sands Desert");
-
-        companyLogoList.add("https://i.redd.it/obx4zydshg601.jpg");
-        companyNameList.add("Austrailia");
-
-        companyLogoList.add("https://i.imgur.com/ZcLLrkY.jpg");
-        companyNameList.add("Washington");
-
-
-    }*/
+    
     //To activate the menu on this activity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
