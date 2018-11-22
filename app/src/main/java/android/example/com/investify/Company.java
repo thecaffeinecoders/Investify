@@ -1,10 +1,11 @@
 package android.example.com.investify;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class Company {
+public class Company implements Serializable {
     String name;
     String description;
     String logoLInk ;

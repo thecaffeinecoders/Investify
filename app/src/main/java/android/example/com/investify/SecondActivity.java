@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class SecondActivity extends AppCompatActivity {
     private static final String TAG = "SecondActivity";
-    private ArrayList<Company> companiesList= new ArrayList<>();
+    public ArrayList<Company> companiesList= new ArrayList<>();
    // private ArrayList<String> companyNameList= new ArrayList<>();
     //private ArrayList <String> companyLogoList= new ArrayList<>();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -108,5 +108,9 @@ public class SecondActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public Company getCompany(){
+        return null;
     }
 }
