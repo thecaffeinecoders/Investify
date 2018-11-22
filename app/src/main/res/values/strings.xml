@@ -2,7 +2,7 @@
     <string name="app_name">Investify</string>
     <string name="investify">Investify</string>
     <string name="amount_you_want_to_invest">Amount you want to invest</string>
-    <string name="check_possible_profits">Check possible profits</string>
+    <string name="check_possible_profits">Projected profits</string>
     <string name="estimated_profit">Estimated Profit</string>
     <string name="year">Year</string>
     <string name="chart_desc">The company performance chart</string>
