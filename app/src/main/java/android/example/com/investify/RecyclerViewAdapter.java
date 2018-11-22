@@ -1,6 +1,7 @@
 package android.example.com.investify;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
+import static com.bumptech.glide.Glide.with;
+import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
 
 /**This class is responsible for preparing the items of companies list to
  * be displayed in the Recycler View
@@ -58,12 +61,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final Company company = companiesList.get(position);
-        Glide.with(context).asBitmap().load(company.getLogoLInk()).into(holder.image);
+        Glide.with(context).asBitmap().load(company.getLogoLInk()).apply(fitCenterTransform()).into(holder.image);//image Loader
         holder.tvName.setText(company.getName());
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,ThirdActivity.class);
+
+                intent.putExtra("company",company);
                 intent.putExtra("Name",company.getName());
                 context.startActivity(intent);
             }

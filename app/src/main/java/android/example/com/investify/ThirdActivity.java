@@ -1,9 +1,14 @@
 package android.example.com.investify;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import android.util.Log;
+
 import android.text.method.ScrollingMovementMethod;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,7 +30,7 @@ import org.apache.commons.math3.stat.regression.SimpleRegression;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThirdActivity extends AppCompatActivity {
+public class ThirdActivity extends AppCompatActivity  {
 
     double [][]value = {{1,-1.96},{2,4.61},{3,-3.71},{4,-3.32},{5,-2.37},{6,-6.94},{7,2.37},{8,5.07},{9,-4.45},{10,5.90},{11,0.36},{12,-0.02}};
     ArrayList<Integer> source = new ArrayList<Integer>();
@@ -36,6 +41,12 @@ public class ThirdActivity extends AppCompatActivity {
     GraphView graph;
     TextView tvCompDesc;
 
+
+
+
+
+
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +55,12 @@ public class ThirdActivity extends AppCompatActivity {
         fillSpinnerData();
 
         final Spinner spin = (Spinner) findViewById(R.id.spinNumber);
+
+
+        Intent i = getIntent();
+        Company selectedCompany = (Company) i.getSerializableExtra("company");
+        Toast.makeText(this,selectedCompany.getName().toString(),Toast.LENGTH_LONG).show();
+        Toast.makeText(this,selectedCompany.perfValues.get("2017").get(11).toString(),Toast.LENGTH_LONG).show();
 
         tvCompDesc=(TextView) findViewById(R.id.tvCompDesc);
         tvCompDesc.setMovementMethod(new ScrollingMovementMethod());
