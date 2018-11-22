@@ -40,9 +40,14 @@ public class SecondActivity extends AppCompatActivity {
 
         int revenue = (int) getIntent().getDoubleExtra("Revenue",0);
         int amount = (int) getIntent().getDoubleExtra("Amount",0);
+
+
+        TextView tvInvested = (TextView) findViewById(R.id.tv_valueOfInvestment);
         TextView tvRevenue = (TextView) findViewById(R.id.et_maxProfit);
 
-        tvRevenue.setText(String.valueOf(revenue));
+        tvInvested.setText(String.valueOf(amount));
+        tvRevenue.setText(String.valueOf(revenue-amount));
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -68,7 +73,7 @@ public class SecondActivity extends AppCompatActivity {
         });
         int x = 0;
 
-        tvRevenue.setText("If you invest " + amount + " your estimate profit will be "+String.valueOf(revenue-amount));
+        //tvRevenue.setText("If you invest " + amount + " your estimate profit will be "+String.valueOf(revenue-amount));
 
     }
 
