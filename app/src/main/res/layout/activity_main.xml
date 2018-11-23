@@ -52,7 +52,7 @@
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="number"
-        android:background="#cfd8dc"/>
+        android:background="@color/accentColor"/>
 
     <Button
         android:id="@+id/btnConfirmAmountEnteredToInvest"
@@ -68,7 +68,7 @@
         android:textStyle="bold"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
-        android:background="#cfd8dc"/>
+        android:background="@color/accentColor"/>
 
 
 </RelativeLayout>
