@@ -45,13 +45,11 @@ public class SecondActivity extends AppCompatActivity {
         TextView tvInvested = (TextView) findViewById(R.id.tv_valueOfInvestment);
         TextView tvRevenue = (TextView) findViewById(R.id.et_maxProfit);
 
-<<<<<<< HEAD
-        //tvRevenue.setText(String.valueOf(revenue));
-=======
+
         tvInvested.setText(String.valueOf(amount));
         tvRevenue.setText(String.valueOf(revenue-amount));
 
->>>>>>> origin/master
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
