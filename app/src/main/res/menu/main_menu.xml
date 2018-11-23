@@ -17,11 +17,23 @@ tools:context=".MainActivity"
     android:title="About us"
     app:showAsAction="never"
     android:orderInCategory="100" />
+<!--
 
+        <item
+            android:id="@+id/action_search"
+            android:icon="@android:drawable/ic_menu_search"
+            android:orderInCategory="100"
+            android:title="Search"
+            app:showAsAction="always" />
+    -->
     <item
-        android:id="@+id/search_id"
+        android:id="@+id/action_search"
         android:icon="@android:drawable/ic_menu_search"
         android:orderInCategory="100"
-        android:title="Search"
-        app:showAsAction="always" />
+        android:title="@string/search_title"
+        app:showAsAction="always"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
+
+
+
 </menu>

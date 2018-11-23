@@ -4,18 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import java.util.ArrayList;
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import static com.bumptech.glide.Glide.with;
 import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
@@ -28,12 +27,16 @@ import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
 
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>  {
-    private ArrayList<Company> companiesList= new ArrayList<Company>();
+    private ArrayList<Company> companyList = new ArrayList<Company>();
     private Context context;
+    private List<Company> companyListFiltered;
+    private CompanyAdapterListener listener;
 
     public RecyclerViewAdapter( Context context,ArrayList<Company> companiesList) {
-        this.companiesList = companiesList;
         this.context = context;
+        //this.listener = listener;
+        this.companyList = companiesList;
+        this.companyListFiltered = companiesList;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -47,6 +50,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             tvName= itemView.findViewById(R.id.tvCompanyName);
             parent=itemView.findViewById(R.id.parent_layout);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // send selected contact in callback
+                    listener.onCompanySelected(companyListFiltered.get(getAdapterPosition()));
+                }
+            });
         }
     }
 
@@ -60,8 +70,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        final Company company = companiesList.get(position);
+
+        //final Company company = companyList.get(position);
+        final Company company = companyListFiltered.get(position);
+        //Glide.with(context).asBitmap().load(company.getLogoLInk()).into(holder.image);
         Glide.with(context).asBitmap().load(company.getLogoLInk()).apply(fitCenterTransform()).into(holder.image);//image Loader
+
         holder.tvName.setText(company.getName());
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,13 +92,52 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return companiesList.size();
+        //return companyList.size();
+        return companyListFiltered.size();
     }
 
 
-    /*public Filter getFilter() {
-        return null;
-    }*/
+    //@Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    companyListFiltered = companyList;
+                } else {
+                    List<Company> filteredList = new ArrayList<>();
+                    for (Company row : companyList) {
 
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or description match
+                        //if (row.getName().toLowerCase().contains(charString.toLowerCase()) || row.getDescription().contains(charSequence)) {
 
+                        // here we are looking for only name matching
+                        if (row.getName().toLowerCase().contains(charString.toLowerCase())) {
+                            filteredList.add(row);
+                        }
+                    }
+
+                    companyListFiltered = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = companyListFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                companyListFiltered = (ArrayList<Company>) filterResults.values;
+
+                // refresh the list (recycler view) with filtered data
+                notifyDataSetChanged();
+            }
+        };
+    }
+
+    public interface CompanyAdapterListener {
+        void onCompanySelected(Company company);
+    }
 }
