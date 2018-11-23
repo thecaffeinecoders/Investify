@@ -15,36 +15,68 @@
             android:id="@+id/rlo_topHalf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0">
+            android:layout_weight="0"
+            android:background="#0d47a1">
 
             <TextView
                 android:id="@+id/tv_valueTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Estimated Maximum Profit:"
-                android:textSize="20dp" />
+                android:fontFamily="sans-serif"
+                android:text="@string/yourInvestment"
+                android:textColor="#ffffff"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tv_valueOfInvestment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv_valueTitle"
+                android:layout_marginTop="16dp"
+                android:background="#0d47a1"
+                android:fontFamily="sans-serif"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                android:layout_marginLeft="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_whatIsProfit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_valueTitle"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/profit"
+                android:textColor="#ffffff"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/et_maxProfit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_valueTitle"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:text="Profit after calculation"
-                android:textSize="18dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/tv_whatIsProfit"
+                android:fontFamily="sans-serif"
+                android:textColor="#fff"
+                android:textSize="24sp" />
 
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="#fff">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/reviewCompanyList"
