@@ -8,7 +8,7 @@
     tools:layout_editor_absoluteY="81dp">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgCompLogo"
         android:layout_width="163dp"
         android:layout_height="0dp"
         android:layout_marginStart="128dp"
@@ -76,7 +76,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imgCompLogo" />
 
     <Button
         android:id="@+id/btnConfirmAmountEnteredToInvest"
