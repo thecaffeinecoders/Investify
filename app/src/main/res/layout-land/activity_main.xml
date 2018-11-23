@@ -63,7 +63,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="4dp"
         android:autofillHints="@string/amount_you_want_to_invest"
-        android:background="@android:color/darker_gray"
+        android:background="@color/accentColor"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/btnConfirmAmountEnteredToInvest"
@@ -78,11 +78,14 @@
         android:layout_below="@id/teAmountEnteredToInvest"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="8dp"
+        android:background="@color/accentColor"
         android:onClick="moveNext"
         android:text="@string/check_possible_profits"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.484"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingRight="4dp"
+        android:paddingLeft="4dp"/>
 
 </android.support.constraint.ConstraintLayout>
