@@ -27,10 +27,12 @@ import java.util.ArrayList;
 
 public class SecondActivity extends AppCompatActivity {
     private static final String TAG = "SecondActivity";
+
     private ArrayList<Company> companiesList= new ArrayList<>();
     private RecyclerView recyclerView;
     RecyclerViewAdapter adapter;
     private SearchView searchView;
+
    // private ArrayList<String> companyNameList= new ArrayList<>();
     //private ArrayList <String> companyLogoList= new ArrayList<>();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -48,9 +50,16 @@ public class SecondActivity extends AppCompatActivity {
 
         int revenue = (int) getIntent().getDoubleExtra("Revenue",0);
         int amount = (int) getIntent().getDoubleExtra("Amount",0);
+
+
+        TextView tvInvested = (TextView) findViewById(R.id.tv_valueOfInvestment);
         TextView tvRevenue = (TextView) findViewById(R.id.et_maxProfit);
 
-        tvRevenue.setText(String.valueOf(revenue));
+
+        tvInvested.setText(String.valueOf(amount));
+        tvRevenue.setText(String.valueOf(revenue-amount));
+
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -76,10 +85,11 @@ public class SecondActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-        int x = 0;
-        //adapter.notifyDataSetChanged();
 
-        tvRevenue.setText("If you invest " + amount + " your estimate profit will be "+String.valueOf(revenue-amount));
+       // int x = 0;
+
+
+        //tvRevenue.setText("If you invest " + amount + " your estimate profit will be "+String.valueOf(revenue-amount));
 
     }
 
@@ -148,6 +158,7 @@ public class SecondActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public void onBackPressed() {
         // close search view on back button pressed
@@ -156,5 +167,10 @@ public class SecondActivity extends AppCompatActivity {
             return;
         }
         super.onBackPressed();
+    }
+
+    public Company getCompany(){
+        return null;
+
     }
 }

@@ -32,17 +32,19 @@
 
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imgCompLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/lynx" />
+            android:layout_weight="2"
+             />
 
         <TextView
-            android:id="@+id/tvResult"
+            android:id="@+id/tvComName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:hint="Company Name"
+            android:layout_weight="1"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -86,8 +88,8 @@
             <RadioButton
                 android:id="@+id/rbThreeYear"
                 android:layout_width="match_parent"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="3 Years" />
 
             <RadioButton
@@ -115,33 +117,36 @@
     </LinearLayout>
 
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tvYear"
-            android:layout_width="100dp"
-            android:layout_height="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_above="@+id/spinNumber"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="36dp"
-            android:layout_marginLeft="36dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="99dp"
-            android:layout_marginRight="99dp"
-            android:layout_marginBottom="14dp"
+
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
             android:layout_toStartOf="@+id/tvEstimate"
             android:layout_toLeftOf="@+id/tvEstimate"
             android:gravity="center"
             android:text="@string/year"
-
             android:textSize="20sp"
-
-            android:textStyle="bold">
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/spinNumber"
+            app:layout_constraintEnd_toStartOf="@+id/tvEstimate"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.6">
 
         </TextView>
 
@@ -153,14 +158,17 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="68dp"
-            android:layout_marginRight="68dp"
-            android:layout_marginBottom="11dp"
-            android:text="@string/estimated_profit"
 
+            android:layout_marginTop="8dp"
+            android:text="@string/estimated_profit"
             android:textSize="20sp"
-            android:textStyle="bold">
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tvEstimatedProfit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvYear"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
         </TextView>
 
@@ -172,54 +180,63 @@
             android:layout_above="@+id/tvCompDesc"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginStart="51dp"
-            android:layout_marginLeft="51dp"
-            android:layout_marginEnd="64dp"
-            android:layout_marginRight="64dp"
-            android:layout_marginBottom="13dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_toStartOf="@+id/tvEstimatedProfit"
             android:layout_toLeftOf="@+id/tvEstimatedProfit"
             android:layout_weight="1"
-            android:gravity="right"></Spinner>
+            android:gravity="right"
+            app:layout_constraintBottom_toTopOf="@+id/tvCompDesc"
+            app:layout_constraintEnd_toStartOf="@+id/tvEstimatedProfit"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"></Spinner>
 
 
         <TextView
             android:id="@+id/tvEstimatedProfit"
 
-            android:layout_width="153dp"
+            android:layout_width="154dp"
 
-            android:layout_height="wrap_content"
+            android:layout_height="19dp"
             android:layout_above="@+id/tvCompDesc"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginEnd="43dp"
-            android:layout_marginRight="43dp"
-            android:layout_marginBottom="21dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="2"
             android:gravity="center"
             android:hint="Estimate_profit"
-            android:textStyle="bold"></TextView>
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tvCompDesc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/spinNumber"></TextView>
 
 
         <TextView
             android:id="@+id/tvCompDesc"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_width="341dp"
+            android:layout_height="50dp"
             android:layout_above="@+id/btnInvest"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginStart="11dp"
-            android:layout_marginLeft="11dp"
-            android:layout_marginEnd="7dp"
-            android:layout_marginRight="7dp"
-            android:layout_marginBottom="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:hint="Company Description"
             android:inputType="textMultiLine"
             android:scrollbars="horizontal"
-            android:textStyle="bold">
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/btnInvest"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
         </TextView>
 
@@ -233,14 +250,17 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="137dp"
-            android:layout_marginLeft="137dp"
-            android:layout_marginEnd="159dp"
-            android:layout_marginRight="159dp"
-            android:layout_marginBottom="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
-            android:hint="Invest" />
+            android:hint="Invest"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>
