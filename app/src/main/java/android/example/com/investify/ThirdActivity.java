@@ -148,7 +148,7 @@ public class ThirdActivity extends AppCompatActivity  {
                     values.add(Double.parseDouble(((String)selectedCompany.perfValues.get(String.valueOf(currentYear-1)).get(i)).replace(",",".")));
                 break;
             case 5:
-                
+
                 for(int i=0;i<selectedCompany.perfValues.get(String.valueOf(currentYear-5)).size();i++)
                     values.add(Double.parseDouble(((String)selectedCompany.perfValues.get(String.valueOf(currentYear-5)).get(i)).replace(",",".")));
                 for(int i=0;i<selectedCompany.perfValues.get(String.valueOf(currentYear-4)).size();i++)
