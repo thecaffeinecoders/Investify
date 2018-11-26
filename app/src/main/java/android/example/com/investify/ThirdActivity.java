@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -42,7 +43,6 @@ import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
 public class ThirdActivity extends AppCompatActivity  {
 
     public Company selectedCompany;
-    double [][]value = {{1,-1.96},{2,4.61},{3,-3.71},{4,-3.32},{5,-2.37},{6,-6.94},{7,2.37},{8,5.07},{9,-4.45},{10,5.90},{11,0.36},{12,-0.02}};
     ArrayList<Integer> source = new ArrayList<Integer>();
     List<Double> values=new ArrayList<>();
     RadioGroup radioGroup;
@@ -51,12 +51,7 @@ public class ThirdActivity extends AppCompatActivity  {
     RadioButton fiveYear;
     GraphView graph;
     TextView tvCompDesc;
-
-
-
-
-
-
+    ArrayList<Double> profitCalculationSource = new ArrayList<>(60);
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -109,8 +104,7 @@ public class ThirdActivity extends AppCompatActivity  {
             }
         });
 
-
-
+        mostRecent60Months();
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, source);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(adapter);
@@ -118,9 +112,6 @@ public class ThirdActivity extends AppCompatActivity  {
 
 
     }
-
-
-
 
     private void chartDisplay(int year) {
 
@@ -258,5 +249,88 @@ public class ThirdActivity extends AppCompatActivity  {
         Intent webIntent = new Intent(this,WebViewActivity.class);
         webIntent.putExtra("url",selectedCompany.url);
         startActivity(webIntent);
+    }
+
+    /**
+     * Collates the 60 most recent data points.
+     * Order of addition does affect our result.
+     * @return ArrayList of data points.
+     */
+    public ArrayList<Double> mostRecent60Months(){
+
+        profitCalculationSource.clear();
+        int balanceMonthFromCurrentYear;
+        int numberOfMonthsFromCurrentYear=0;
+        int currentMonth=Calendar.getInstance().get(Calendar.MONTH);
+        String currentYearAsKey=Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+        int currentYear=Calendar.getInstance().get(Calendar.YEAR);
+
+        for(int i=0; i<currentMonth; i++){
+            numberOfMonthsFromCurrentYear++;
+        }
+
+        balanceMonthFromCurrentYear=(11-numberOfMonthsFromCurrentYear);
+
+        //Data from current year
+        for(int i=0; i<=numberOfMonthsFromCurrentYear; i++){
+            ArrayList<Object> perfValuesOfEntireYear = selectedCompany.getPerfValues().get(currentYearAsKey);
+            Object monthValue = perfValuesOfEntireYear.get(i);
+            double valueOfMonth = Double.parseDouble(String.valueOf(monthValue).replace(",","."));
+            profitCalculationSource.add(valueOfMonth);
+        }
+
+        //Data from the past 4 years
+        for( int i=1; i<5; i++){
+            ArrayList<Object> perfValuesOfEntireYear=selectedCompany.getPerfValues().get(Integer.toString(currentYear-i));
+            for(Object object : perfValuesOfEntireYear){
+                double monthValue = Double.parseDouble(String.valueOf(object).replace(",","."));
+                profitCalculationSource.add(monthValue);
+            }
+        }
+
+        //Data from the 5th year
+        for (int i = 0; i<balanceMonthFromCurrentYear; i++) {
+            int j=11-i;
+            ArrayList<Object> perfValuesOfEntireYear = selectedCompany.getPerfValues().get(Integer.toString(currentYear - 5));
+            Object monthValue = perfValuesOfEntireYear.get(j);
+            double valueOfMonth = Double.parseDouble(String.valueOf(monthValue).replace(",", "."));
+            profitCalculationSource.add(valueOfMonth);
+        }
+        return profitCalculationSource;
+    }
+
+    /**
+     * Retrieves user input.
+     * @return double amount
+     */
+    private double getPrincipalAmount(){
+        try {
+            EditText input = (EditText) findViewById(R.id.teAmountEnteredToInvest);
+            String readInput = input.getText().toString();
+            double principal = Integer.parseInt(readInput);
+            return principal;
+            } catch (NumberFormatException e) {
+                return 0;
+            }
+    }
+
+    /**
+     * Estimates profit based on past 12 months' performance
+     * @return Estimated profit
+     */
+    public double profitEstimateBasedOnPast12Months(){
+
+        SimpleRegression recentYearData = new SimpleRegression();
+        double slope;
+        double intercept;
+
+        for(int i=0; i<12; i++){
+            double [][]value={{i,profitCalculationSource.get(i)}};
+            recentYearData.addData(value);
+        }
+        intercept=recentYearData.getIntercept();
+        slope=recentYearData.getSlope();
+
+        return (getPrincipalAmount()/100)*((12*slope)+intercept);
     }
 }

@@ -48,24 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater=getMenuInflater();
-        inflater.inflate(R.menu.info_menu,menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        startActivity(new Intent(this,Information.class));
-        return super.onOptionsItemSelected(item);
-    }
-
-
     /**
      * Takes value user inputs for computational use
      * @param view Takes in String from specified View
