@@ -38,7 +38,6 @@
             android:name=".Information"
             android:parentActivityName=".MainActivity"></activity>
 
-        
 
         <meta-data
             android:name="preloaded_fonts"
