@@ -37,7 +37,12 @@
             android:parentActivityName=".SecondActivity" />
         <activity
             android:name=".Information"
-            android:parentActivityName=".MainActivity" />
+
+            android:parentActivityName=".MainActivity"></activity>
+
+
+
+
 
         <meta-data
             android:name="preloaded_fonts"

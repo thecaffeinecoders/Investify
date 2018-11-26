@@ -8,10 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +43,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        CircleImageView image;
+        ImageView image;
         TextView tvName;
         RelativeLayout parent;
 
@@ -73,7 +76,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         //final Company company = companyList.get(position);
         final Company company = companyListFiltered.get(position);
-        //Glide.with(context).asBitmap().load(company.getLogoLInk()).into(holder.image);
+        RequestOptions options = new RequestOptions();
+        options.centerInside();
         Glide.with(context).asBitmap().load(company.getLogoLInk()).apply(fitCenterTransform()).into(holder.image);//image Loader
 
         holder.tvName.setText(company.getName());
