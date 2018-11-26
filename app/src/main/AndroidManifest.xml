@@ -2,18 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="android.example.com.investify">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity"
+        <activity android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".SecondActivity"
             android:parentActivityName=".MainActivity">
@@ -34,17 +33,17 @@
         </activity>
         <activity
             android:name=".ThirdActivity"
-            android:parentActivityName=".SecondActivity" />
+            android:parentActivityName=".SecondActivity"></activity>
         <activity
             android:name=".Information"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"></activity>
+
+        
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".WebViewActivity"
-            android:parentActivityName=".SecondActivity"></activity>
     </application>
 
 </manifest>

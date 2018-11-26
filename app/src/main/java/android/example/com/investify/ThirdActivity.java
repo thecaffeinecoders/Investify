@@ -14,7 +14,6 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -251,25 +250,5 @@ public class ThirdActivity extends AppCompatActivity  {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void viewWebPage(View view) {
-
-        Intent webIntent = new Intent(this,WebViewActivity.class);
-        switch (selectedCompany.name)
-        {
-            case "Lynx":
-                webIntent.putExtra("url","http://www.lynxhedge.se/");
-                break;
-            case "Excaliburfonder":
-                webIntent.putExtra("url","https://excaliburfonder.se/");
-                break;
-            case "Crescit":
-                webIntent.putExtra("url","http://www.crescit.se/");
-                break;
-
-        }
-
-        startActivity(webIntent);
     }
 }
