@@ -256,20 +256,7 @@ public class ThirdActivity extends AppCompatActivity  {
     public void viewWebPage(View view) {
 
         Intent webIntent = new Intent(this,WebViewActivity.class);
-        switch (selectedCompany.name)
-        {
-            case "Lynx":
-                webIntent.putExtra("url","http://www.lynxhedge.se/");
-                break;
-            case "Excaliburfonder":
-                webIntent.putExtra("url","https://excaliburfonder.se/");
-                break;
-            case "Crescit":
-                webIntent.putExtra("url","http://www.crescit.se/");
-                break;
-
-        }
-
+        webIntent.putExtra("url",selectedCompany.url);
         startActivity(webIntent);
     }
 }
