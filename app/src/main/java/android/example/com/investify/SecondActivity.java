@@ -140,18 +140,13 @@ public class SecondActivity extends AppCompatActivity {
     }
 
 
-    // A temporary method for the selected item from the menu
+    // A method for the menu options
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.about_us_id:
-                Toast.makeText(this,"About Us ",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.contact_us_id:
-                Toast.makeText(this,"Contact Us ",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.action_search:
-                Toast.makeText(this,"Search ",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this,AboutUs.class);
+                startActivity(intent);
                 break;
         }
 
