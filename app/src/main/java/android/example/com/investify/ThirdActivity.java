@@ -56,6 +56,8 @@ public class ThirdActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.zoom_entry,R.anim.zoom_exit);
+
         setContentView(R.layout.activity_third);
         
         fillSpinnerData();
