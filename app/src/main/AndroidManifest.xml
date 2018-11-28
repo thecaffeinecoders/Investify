@@ -14,7 +14,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +24,8 @@
         </activity>
         <activity
             android:name=".SecondActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
@@ -34,7 +36,8 @@
         </activity>
         <activity
             android:name=".ThirdActivity"
-            android:parentActivityName=".SecondActivity" />
+            android:parentActivityName=".SecondActivity"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".Information"
 

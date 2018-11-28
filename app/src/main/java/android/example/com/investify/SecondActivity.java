@@ -51,8 +51,7 @@ public class SecondActivity extends AppCompatActivity {
 
 
         double revenue = getIntent().getDoubleExtra("Revenue",0);
-        int amount = (int) getIntent().getDoubleExtra("Amount",0);
-
+        final int amount = (int) getIntent().getDoubleExtra("Amount",0);
 
         TextView tvInvested = (TextView) findViewById(R.id.tv_valueOfInvestment);
         TextView tvRevenue = (TextView) findViewById(R.id.et_maxProfit);
@@ -75,7 +74,7 @@ public class SecondActivity extends AppCompatActivity {
                     Log.d(TAG, "Value is: " + company.toString());
                 }
                 recyclerView = findViewById(R.id.reviewCompanyList);
-                adapter = new RecyclerViewAdapter(SecondActivity.this, companiesList);
+                adapter = new RecyclerViewAdapter(SecondActivity.this, companiesList,amount);
                 recyclerView.setAdapter(adapter);
                 //adapter.notifyDataSetChanged();
                 recyclerView.setLayoutManager(new LinearLayoutManager(SecondActivity.this));

@@ -1,5 +1,6 @@
 package android.example.com.investify;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,7 +34,9 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.apache.commons.math3.stat.regression.SimpleRegression;
+import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,7 +47,6 @@ import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
 public class ThirdActivity extends AppCompatActivity  {
 
     public Company selectedCompany;
-    ArrayList<Integer> source = new ArrayList<Integer>();
     List<Double> values=new ArrayList<>();
     RadioGroup radioGroup;
     RadioButton oneYear;
@@ -52,20 +55,18 @@ public class ThirdActivity extends AppCompatActivity  {
     GraphView graph;
     TextView tvCompDesc;
     ArrayList<Double> profitCalculationSource = new ArrayList<>(60);
+    private static DecimalFormat decimalFormat = new DecimalFormat(".##");
+    Spinner spinner;
+    int amount;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
-        
-        fillSpinnerData();
-        final Spinner spin = (Spinner) findViewById(R.id.spinNumber);
-
-
 
         Intent i = getIntent();
         selectedCompany = (Company) i.getSerializableExtra("company");
-
+        this.amount = i.getIntExtra("principal",0);
         //Toast.makeText(this,selectedCompany.logoLInk,Toast.LENGTH_LONG).show();
 //        int x = selectedCompany.perfValues.get("2017").size();
 //        Toast.makeText(this,selectedCompany.perfValues.get("2017").size(),Toast.LENGTH_LONG).show();
@@ -105,12 +106,13 @@ public class ThirdActivity extends AppCompatActivity  {
         });
 
         mostRecent60Months();
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, source);
+
+        spinner = (Spinner) findViewById(R.id.spinNumber);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.spinner_content, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spin.setAdapter(adapter);
-
-
-
+        spinner.setAdapter(adapter);
+        SpinnerOnItemSelectedListener listener = new SpinnerOnItemSelectedListener();
+        spinner.setOnItemSelectedListener(listener);
     }
 
     private void chartDisplay(int year) {
@@ -214,13 +216,6 @@ public class ThirdActivity extends AppCompatActivity  {
 
     }
 
-
-    private void fillSpinnerData() {
-        source.add(1);
-        source.add(3);
-        source.add(5);
-    }
-
     //To activate the menu on this activity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -300,21 +295,6 @@ public class ThirdActivity extends AppCompatActivity  {
     }
 
     /**
-     * Retrieves user input.
-     * @return double amount
-     */
-    private double getPrincipalAmount(){
-        try {
-            EditText input = (EditText) findViewById(R.id.teAmountEnteredToInvest);
-            String readInput = input.getText().toString();
-            double principal = Integer.parseInt(readInput);
-            return principal;
-            } catch (NumberFormatException e) {
-                return 0;
-            }
-    }
-
-    /**
      * Estimates profit based on past 12 months' performance
      * @return Estimated profit
      */
@@ -331,6 +311,73 @@ public class ThirdActivity extends AppCompatActivity  {
         intercept=recentYearData.getIntercept();
         slope=recentYearData.getSlope();
 
-        return (getPrincipalAmount()/100)*((12*slope)+intercept);
+        return (amount/100)*((12*slope)+intercept);
+    }
+
+    public double yearEstimateBasedOnVaryingMonths(int numberOfYears) {
+
+        SimpleRegression recentData = new SimpleRegression();
+        double slope;
+        double intercept;
+
+        for (int i = 0; i < 12 * numberOfYears; i++) {
+            double[][] value = {{i, profitCalculationSource.get(i)}};
+            recentData.addData(value);
+        }
+        intercept = recentData.getIntercept();
+        slope = recentData.getSlope();
+
+        return (amount/ 100) * ((12 * slope) + intercept);
+    }
+
+    //The value varies based on the different slope and intercept value. The value is NOT profit for 3 years!
+
+    /*public void spinnerProfitResult(int choice){
+        TextView tv = (TextView) findViewById(R.id.tvEstimatedProfit);
+
+        switch (choice)
+        {
+            case 1:
+                tv.setText(String.valueOf(decimalFormat.format(profitEstimateBasedOnPast12Months())));
+                break;
+
+            case 3:
+                tv.setText(String.valueOf(decimalFormat.format(yearEstimateBasedOnVaryingMonths(choice))));
+                break;
+
+            case 5:
+                tv.setText(String.valueOf(decimalFormat.format(yearEstimateBasedOnVaryingMonths(choice))));
+                break;
+        }
+    }*/
+
+    public class SpinnerOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> parent, View view,
+                                   int pos, long id) {
+            // An item was selected. You can retrieve the selected item using
+            // parent.getItemAtPosition(pos)
+            TextView tv = (TextView) findViewById(R.id.tvEstimatedProfit);
+            int choice = Integer.valueOf(parent.getSelectedItem().toString());
+            switch (pos)
+            {
+                case 0:
+                    tv.setText(String.valueOf(decimalFormat.format(profitEstimateBasedOnPast12Months())));
+                    break;
+
+                case 1:
+                    tv.setText(String.valueOf(decimalFormat.format(yearEstimateBasedOnVaryingMonths(choice))));
+                    break;
+
+                case 2:
+                    tv.setText(String.valueOf(decimalFormat.format(yearEstimateBasedOnVaryingMonths(choice))));
+                    break;
+            }
+
+        }
+
+        public void onNothingSelected(AdapterView<?> parent) {
+            // Another interface callback
+        }
     }
 }

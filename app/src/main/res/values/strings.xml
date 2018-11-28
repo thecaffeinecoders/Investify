@@ -16,5 +16,11 @@
     <string name="yourInvestment">Your investment : </string>
     <string name="profit">Profit* : </string>
 
+    <string-array name="spinner_content">
+        <item>1</item>
+        <item>3</item>
+        <item>5</item>
+    </string-array>
+
 
 </resources>
