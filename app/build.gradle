@@ -40,15 +40,13 @@ dependencies {
     //circle imageview
     api 'de.hdodenhof:circleimageview:2.2.0'
 
-    api 'org.apache.commons:commons-math3:3.6.1'
-
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
 
     api 'com.google.firebase:firebase-database:16.0.4'
     apply plugin: 'com.google.gms.google-services'
 
 
-
+    //Simple Regression
     api 'org.apache.commons:commons-math3:3.6.1'
 
 
