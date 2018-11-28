@@ -3,6 +3,7 @@ package android.example.com.investify;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class Company implements Serializable {
@@ -62,4 +63,26 @@ public class Company implements Serializable {
     public void setPerfValues(HashMap<String, ArrayList<Object>> perfValues) {
         this.perfValues = perfValues;
     }
+
+
+    /**
+     * A method to cast the company performance hashmap fetched from database
+     * @return a HashMap Key -> Integer  Value -> ArrayList <Double>
+     */
+    public HashMap<Integer,ArrayList<Double>> performance()
+    {
+        HashMap<Integer,ArrayList<Double>> tempPerf = new HashMap<>();
+     for(Map.Entry<String,ArrayList<Object>> entry : this.perfValues.entrySet())
+     {
+         ArrayList<Double> val = new ArrayList<>();
+         for(Object obj : entry.getValue())
+         {
+             val.add(Double.parseDouble(String.valueOf(obj)));
+         }
+         tempPerf.put(Integer.parseInt(entry.getKey()),val);
+     }
+
+    return tempPerf;
+    }
+
 }
