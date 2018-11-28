@@ -39,13 +39,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     /**
      * Takes value user inputs for computational use
      * @param view Takes in String from specified View
      * @return Integer value
      */
-    private double readPrincipal(View view) {
+    public double readPrincipal(View view) {
         try {
             EditText input = (EditText) findViewById(R.id.teAmountEnteredToInvest);
             String readInput = input.getText().toString();
@@ -55,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
             return 0;
         }
     }
+
+    public double getPrincipal(){return readPrincipal(findViewById(R.id.teAmountEnteredToInvest));}
 
     public double revenue(){
         double revenue;

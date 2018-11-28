@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class SecondActivity extends AppCompatActivity {
@@ -32,6 +33,7 @@ public class SecondActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     RecyclerViewAdapter adapter;
     private SearchView searchView;
+    private static DecimalFormat decimalFormat = new DecimalFormat(".##");
 
    // private ArrayList<String> companyNameList= new ArrayList<>();
     //private ArrayList <String> companyLogoList= new ArrayList<>();
@@ -50,16 +52,15 @@ public class SecondActivity extends AppCompatActivity {
         //final RecyclerViewAdapter adapter = new RecyclerViewAdapter(SecondActivity.this, companiesList);
 
 
-        int revenue = (int) getIntent().getDoubleExtra("Revenue",0);
-        int amount = (int) getIntent().getDoubleExtra("Amount",0);
-
+        double revenue = getIntent().getDoubleExtra("Revenue",0);
+        final int amount = (int) getIntent().getDoubleExtra("Amount",0);
 
         TextView tvInvested = (TextView) findViewById(R.id.tv_valueOfInvestment);
         TextView tvRevenue = (TextView) findViewById(R.id.et_maxProfit);
 
 
         tvInvested.setText(String.valueOf(amount));
-        tvRevenue.setText(String.valueOf(revenue-amount));
+        tvRevenue.setText(String.valueOf(decimalFormat.format(revenue-amount)));
 
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -75,7 +76,7 @@ public class SecondActivity extends AppCompatActivity {
                     Log.d(TAG, "Value is: " + company.toString());
                 }
                 recyclerView = findViewById(R.id.reviewCompanyList);
-                adapter = new RecyclerViewAdapter(SecondActivity.this, companiesList);
+                adapter = new RecyclerViewAdapter(SecondActivity.this, companiesList,amount);
                 recyclerView.setAdapter(adapter);
                 //adapter.notifyDataSetChanged();
                 recyclerView.setLayoutManager(new LinearLayoutManager(SecondActivity.this));
@@ -87,11 +88,6 @@ public class SecondActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
-       // int x = 0;
-
-
-        //tvRevenue.setText("If you invest " + amount + " your estimate profit will be "+String.valueOf(revenue-amount));
 
     }
 
