@@ -18,7 +18,6 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import static com.bumptech.glide.Glide.with;
 import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
 

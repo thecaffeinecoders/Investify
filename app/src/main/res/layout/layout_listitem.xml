@@ -2,28 +2,51 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="15dp"
-    android:id="@+id/parent_layout">
+    android:layout_height="80dp"
+    android:padding="0dp">
 
-    <ImageView
-        android:id="@+id/imgCompanyLogo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_weight="2"
-        />
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="6dp">
 
-    <TextView
-        android:id="@+id/tvCompanyName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="30dp"
-        android:layout_toRightOf="@+id/imgCompanyLogo"
-        android:textColor="#000"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:fontFamily="@font/amiri_italic" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgCompanyLogo"
+                android:layout_width="170dp"
+                android:layout_height="70dp"
+                android:layout_weight="0"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+
+            <TextView
+                android:id="@+id/tvCompanyName"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/imgCompanyLogo"
+                android:layout_weight="0"
+                android:textColor="#000"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/amiri_italic"
+                tools:text="company" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </RelativeLayout>
