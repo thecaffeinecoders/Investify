@@ -42,6 +42,8 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.left_entry,R.anim.right_exit);
+
         setContentView(R.layout.activity_second);
 
         //final RecyclerView recyclerView = findViewById(R.id.reviewCompanyList);
@@ -146,6 +148,7 @@ public class SecondActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.about_us_id:
                 Intent intent = new Intent(this,AboutUs.class);
+
                 startActivity(intent);
                 break;
         }
