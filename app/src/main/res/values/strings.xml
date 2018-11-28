@@ -24,5 +24,11 @@
     <string name="chen_zhi">Chen Zhi</string>
     <string name="adem_sezer">Adem Sezer</string>
 
+    <string-array name="spinner_content">
+        <item>1</item>
+        <item>3</item>
+        <item>5</item>
+    </string-array>
+
 
 </resources>
