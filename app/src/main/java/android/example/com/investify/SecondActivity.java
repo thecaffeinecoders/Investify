@@ -3,8 +3,11 @@ package android.example.com.investify;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -13,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Filter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +29,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
+import static android.support.v7.widget.DividerItemDecoration.HORIZONTAL;
 
 public class SecondActivity extends AppCompatActivity {
     private static final String TAG = "SecondActivity";
@@ -43,6 +50,13 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+
+/*
+        int resId = R.anim.layout_animation_fall_down;
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(ctx, resId);
+        recyclerView.setLayoutAnimation(animation);
+
+        */
 
         //final RecyclerView recyclerView = findViewById(R.id.reviewCompanyList);
         //final RecyclerViewAdapter adapter = new RecyclerViewAdapter(SecondActivity.this, companiesList);
@@ -77,7 +91,6 @@ public class SecondActivity extends AppCompatActivity {
                 recyclerView.setAdapter(adapter);
                 //adapter.notifyDataSetChanged();
                 recyclerView.setLayoutManager(new LinearLayoutManager(SecondActivity.this));
-
             }
             @Override
             public void onCancelled(DatabaseError error) {
@@ -114,7 +127,9 @@ public class SecondActivity extends AppCompatActivity {
                 .getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
 
-        // listening to search query text change
+        /**
+         * listening to search query text change
+         */
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -153,7 +168,9 @@ public class SecondActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    /**
+     * onBackPressed() method: customized for searchView
+     */
     @Override
     public void onBackPressed() {
         // close search view on back button pressed

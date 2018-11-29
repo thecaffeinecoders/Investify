@@ -10,7 +10,8 @@
     <ImageView
         android:id="@+id/imgCompanyLogo"
         android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
         android:layout_weight="2"
         />
 

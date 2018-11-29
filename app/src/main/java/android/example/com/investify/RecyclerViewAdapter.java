@@ -94,13 +94,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     }
 
+    /**
+     * getItemCount() method for filtering
+     * @return
+     */
     @Override
     public int getItemCount() {
         //return companyList.size();
         return companyListFiltered.size();
     }
 
-
+    /**
+     * Filtering recyclerView items for searching
+     * @return
+     */
     //@Override
     public Filter getFilter() {
         return new Filter() {
