@@ -33,9 +33,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context context;
     private List<Company> companyListFiltered;
     private CompanyAdapterListener listener;
-    private int principal;
+    private double principal;
 
-    public RecyclerViewAdapter( Context context,ArrayList<Company> companiesList,int principal) {
+    public RecyclerViewAdapter( Context context,ArrayList<Company> companiesList,double principal) {
         this.context = context;
         //this.listener = listener;
         this.companyList = companiesList;
@@ -89,7 +89,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 intent.putExtra("company",company);
                 intent.putExtra("Name",company.getName());
-                intent.putExtra("principal",principal);
+                intent.putExtra("Principal",principal);
                 context.startActivity(intent);
             }
         });

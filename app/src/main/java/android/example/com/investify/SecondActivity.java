@@ -23,8 +23,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.apache.commons.math3.stat.regression.SimpleRegression;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class SecondActivity extends AppCompatActivity {
     private static final String TAG = "SecondActivity";
@@ -34,6 +37,7 @@ public class SecondActivity extends AppCompatActivity {
     RecyclerViewAdapter adapter;
     private SearchView searchView;
     private static DecimalFormat decimalFormat = new DecimalFormat(".##");
+    private double principal;
 
    // private ArrayList<String> companyNameList= new ArrayList<>();
     //private ArrayList <String> companyLogoList= new ArrayList<>();
@@ -51,16 +55,13 @@ public class SecondActivity extends AppCompatActivity {
         //final RecyclerView recyclerView = findViewById(R.id.reviewCompanyList);
         //final RecyclerViewAdapter adapter = new RecyclerViewAdapter(SecondActivity.this, companiesList);
 
-
-        double revenue = getIntent().getDoubleExtra("Revenue",0);
-        final int amount = (int) getIntent().getDoubleExtra("Amount",0);
+        this.principal = getIntent().getDoubleExtra("Principal",0);
 
         TextView tvInvested = (TextView) findViewById(R.id.tv_valueOfInvestment);
-        TextView tvRevenue = (TextView) findViewById(R.id.et_maxProfit);
+        final TextView tvRevenue = (TextView) findViewById(R.id.et_maxProfit);
 
+        tvInvested.setText(String.valueOf(decimalFormat.format(principal)));
 
-        tvInvested.setText(String.valueOf(amount));
-        tvRevenue.setText(String.valueOf(decimalFormat.format(revenue-amount)));
 
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -76,10 +77,13 @@ public class SecondActivity extends AppCompatActivity {
                     Log.d(TAG, "Value is: " + company.toString());
                 }
                 recyclerView = findViewById(R.id.reviewCompanyList);
-                adapter = new RecyclerViewAdapter(SecondActivity.this, companiesList,amount);
+                adapter = new RecyclerViewAdapter(SecondActivity.this, companiesList,principal);
                 recyclerView.setAdapter(adapter);
                 //adapter.notifyDataSetChanged();
                 recyclerView.setLayoutManager(new LinearLayoutManager(SecondActivity.this));
+
+                double highestProfit = highestProfit();
+                tvRevenue.setText(String.valueOf(decimalFormat.format(highestProfit)));
 
             }
             @Override
@@ -88,7 +92,6 @@ public class SecondActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
     }
 
     protected void onStart() {
@@ -166,5 +169,63 @@ public class SecondActivity extends AppCompatActivity {
     public Company getCompany(){
         return null;
 
+    }
+
+    /**
+     * Compares estimated profit from all companies.
+     * @return The highest profit
+     */
+    public double highestProfit(){
+        double profit;
+        double higherProfit=0;
+
+        for(Company company:companiesList){
+            profit=profitCalculation(past12MonthsDataForACompany(company));
+            if(profit>higherProfit){
+                higherProfit=profit;
+            }
+        }
+        return higherProfit;
+    }
+
+    /**
+     * Collates the most recent 12 months data
+     * @param company Selected company
+     * @return List of 12 data points
+     */
+    private ArrayList<Double> past12MonthsDataForACompany(Company company){
+        int currentYear=Calendar.getInstance().get(Calendar.YEAR);
+        int monthsFromCurrentYear=Calendar.getInstance().get(Calendar.MONTH);
+        int monthsFromLastYear=11-monthsFromCurrentYear;
+        ArrayList<Double> data=new ArrayList<>(12);
+
+        for(int i=0; i<monthsFromCurrentYear;i++){
+            data.add(company.performance().get(currentYear).get(i));
+        }
+        for(int i=0; i<monthsFromLastYear;i++){
+            int j=11-i;
+            data.add(company.performance().get(currentYear-1).get(j));
+        }
+       return data;
+    }
+
+    /**
+     * Calculates an estimated year's profit, using simple linear regression, from each company
+     * @param data Latest 12 months data
+     * @return Estimated profit
+     */
+    private double profitCalculation(ArrayList<Double> data){
+        SimpleRegression recentYearData = new SimpleRegression();
+        double slope;
+        double intercept;
+
+        for(int i=0;i<data.size();i++){
+            double[][]dataPoints={{i,data.get(i)}};
+            recentYearData.addData(dataPoints);
+        }
+        intercept=recentYearData.getIntercept();
+        slope=recentYearData.getSlope();
+
+        return (principal/100)*((12*slope)+intercept);
     }
 }

@@ -58,7 +58,7 @@ public class ThirdActivity extends AppCompatActivity  {
     ArrayList<Double> profitCalculationSource = new ArrayList<>(60);
     private static DecimalFormat decimalFormat = new DecimalFormat(".##");
     Spinner spinner;
-    int amount;
+    double amount;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class ThirdActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_third);
         Intent i = getIntent();
         selectedCompany = (Company) i.getSerializableExtra("company");
-        this.amount = i.getIntExtra("principal",0);
+        this.amount = i.getDoubleExtra("Principal",0);
         TextView tvComName = (TextView)findViewById(R.id.tvComName);
         tvComName.setText(selectedCompany.name);
 
@@ -83,7 +83,7 @@ public class ThirdActivity extends AppCompatActivity  {
         radioGroup = (RadioGroup) findViewById(R.id.rgYearChoice);  // Radio buttons for the year options
 
         /**
-         * A method to call the chartDispaly() based on the selected year option to draw the chart points and line
+         * A method to call the chartDisplay() based on the selected year option to draw the chart points and line
          */
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -277,7 +277,6 @@ public class ThirdActivity extends AppCompatActivity  {
         int balanceMonthFromCurrentYear;
         int numberOfMonthsFromCurrentYear=0;
         int currentMonth=Calendar.getInstance().get(Calendar.MONTH);
-        String currentYearAsKey=Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
         int currentYear=Calendar.getInstance().get(Calendar.YEAR);
 
         for(int i=0; i<currentMonth; i++){
@@ -288,28 +287,21 @@ public class ThirdActivity extends AppCompatActivity  {
 
         //Data from current year
         for(int i=0; i<=numberOfMonthsFromCurrentYear; i++){
-            ArrayList<Object> perfValuesOfEntireYear = selectedCompany.getPerfValues().get(currentYearAsKey);
-            Object monthValue = perfValuesOfEntireYear.get(i);
-            double valueOfMonth = Double.parseDouble(String.valueOf(monthValue).replace(",","."));
-            profitCalculationSource.add(valueOfMonth);
+            profitCalculationSource.add(selectedCompany.performance().get(currentYear).get(i));
         }
 
         //Data from the past 4 years
         for( int i=1; i<5; i++){
-            ArrayList<Object> perfValuesOfEntireYear=selectedCompany.getPerfValues().get(Integer.toString(currentYear-i));
-            for(Object object : perfValuesOfEntireYear){
-                double monthValue = Double.parseDouble(String.valueOf(object).replace(",","."));
-                profitCalculationSource.add(monthValue);
+            ArrayList<Double> perfValuesOfEntireYear=selectedCompany.performance().get(currentYear-i);
+            for(Double monthlyValue : perfValuesOfEntireYear){
+                profitCalculationSource.add(monthlyValue);
             }
         }
 
         //Data from the 5th year
         for (int i = 0; i<balanceMonthFromCurrentYear; i++) {
             int j=11-i;
-            ArrayList<Object> perfValuesOfEntireYear = selectedCompany.getPerfValues().get(Integer.toString(currentYear - 5));
-            Object monthValue = perfValuesOfEntireYear.get(j);
-            double valueOfMonth = Double.parseDouble(String.valueOf(monthValue).replace(",", "."));
-            profitCalculationSource.add(valueOfMonth);
+            profitCalculationSource.add(selectedCompany.performance().get(currentYear-5).get(j));
         }
         return profitCalculationSource;
     }
