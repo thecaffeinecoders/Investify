@@ -58,9 +58,7 @@ public class ThirdActivity extends AppCompatActivity  {
         Intent i = getIntent();
         selectedCompany = (Company) i.getSerializableExtra("company");
         this.amount = (double) i.getDoubleExtra("principal",0);
-        /*TextView tvComName = (TextView)findViewById(R.id.tvComName);
-        tvComName.setText(selectedCompany.name);
-*/
+
         ImageView imgCompLogo = (ImageView)findViewById(R.id.imgCompLogo); // Company Logo ImageView
         Glide.with(this).asBitmap().load(selectedCompany.logoLInk).apply(fitCenterTransform()).into(imgCompLogo); // Load the image
 
