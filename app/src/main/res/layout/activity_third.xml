@@ -123,7 +123,7 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="253dp"
+            android:layout_height="264dp"
             android:orientation="horizontal">
 
             <TextView
@@ -188,7 +188,7 @@
                 android:layout_toLeftOf="@+id/tvEstimatedProfit"
                 android:layout_weight="1"
                 android:gravity="right"
-                app:layout_constraintBottom_toTopOf="@+id/tvCompDesc"
+                app:layout_constraintBottom_toTopOf="@+id/tvAboutComp"
                 app:layout_constraintEnd_toStartOf="@+id/tvEstimatedProfit"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"></Spinner>
@@ -208,15 +208,33 @@
                 android:gravity="center"
                 android:hint="profit"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/tvCompDesc"
+                app:layout_constraintBottom_toTopOf="@+id/tvAboutComp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/spinNumber"></TextView>
 
             <TextView
+                android:id="@+id/tvAboutComp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="About Company"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toTopOf="@+id/tvCompDesc"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
                 android:id="@+id/tvCompDesc"
-                android:layout_width="365dp"
-                android:layout_height="122dp"
+                android:layout_width="358dp"
+                android:layout_height="104dp"
                 android:layout_above="@+id/btnInvest"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
@@ -227,23 +245,22 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
+                android:fadeScrollbars="false"
                 android:gravity="center"
                 android:hint="Company Description"
                 android:inputType="textMultiLine"
                 android:scrollbars="vertical"
-                android:fadeScrollbars="false"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                android:textColor="@color/light_font"
                 android:shadowColor="@color/text_shadow"
                 android:shadowDx="1"
                 android:shadowDy="1"
                 android:shadowRadius="2"
+                android:textColor="@color/light_font"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:background="@drawable/back"
                 app:layout_constraintBottom_toTopOf="@+id/btnInvest"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-            </TextView>
+                app:layout_constraintStart_toStartOf="parent"></TextView>
 
 
             <Button
@@ -259,6 +276,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
+                android:background="@drawable/button_bg_rounded_corners"
                 android:hint="Visit the Webpage"
                 android:onClick="viewWebPage"
                 app:layout_constraintBottom_toBottomOf="parent"
