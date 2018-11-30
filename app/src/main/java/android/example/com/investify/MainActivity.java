@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     double slope;
     private VideoView mVideoView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

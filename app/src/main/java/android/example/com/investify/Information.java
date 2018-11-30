@@ -7,8 +7,11 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayer.OnInitializedListener;
 import com.google.android.youtube.player.YouTubePlayerFragment;
+import com.r0adkll.slidr.Slidr;
+import com.r0adkll.slidr.model.SlidrInterface;
 
 public class Information extends AppCompatActivity implements OnInitializedListener{
+
     private YouTubePlayerFragment playerFragment;
     private YouTubePlayer mPlayer;
     private String YouTubeKey = "AIzaSyA8G10ZSBY9spfwtNJpTT9kktwilE_j27A";
@@ -17,6 +20,7 @@ public class Information extends AppCompatActivity implements OnInitializedListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
+        Slidr.attach(this);
         playerFragment =
                 (YouTubePlayerFragment) getFragmentManager().findFragmentById(R.id.youtube_player_fragment);
 

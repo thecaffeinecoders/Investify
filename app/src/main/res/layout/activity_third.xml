@@ -18,7 +18,8 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Company performance chart"
+            android:text="Company Performance "
+            android:textColor="@android:color/holo_blue_dark"
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="italic"
@@ -38,7 +39,7 @@
             android:layout_weight="2"
              />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/tvComName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -46,7 +47,7 @@
             android:hint="Company Name"
             android:layout_weight="1"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold" />-->
     </LinearLayout>
 
     <LinearLayout
@@ -79,6 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textStyle="bold"
                 android:text="1 Year" />
 
             <RadioButton
@@ -86,12 +88,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textStyle="bold"
                 android:text="3 Years" />
 
             <RadioButton
                 android:id="@+id/rbFiveYear"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text="5 Years" />
         </RadioGroup>
@@ -108,6 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Estimated Profit Calculation for Selected Company"
+            android:textColor="@android:color/holo_blue_dark"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="italic" />
