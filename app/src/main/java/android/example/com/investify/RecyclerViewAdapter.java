@@ -11,20 +11,14 @@ import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.bumptech.glide.Glide.with;
 import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
 
 /**This class is responsible for preparing the items of companies list to
  * be displayed in the Recycler View
- * @param: Context the activity that contains the Recycler View component
- * @param: CompaniesList the list that stores
  */
 
 
@@ -35,19 +29,37 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private CompanyAdapterListener listener;
     private int principal;
 
+    /**
+     * the RecyclerViewAdapter Class constructor
+     * @param context  The activity that contains the Recycler View component
+     * @param companiesList CompaniesList the list that stores
+     * @param principal The principal amount the user entered in the first activity
+     *                  which will be sent through Intent to the third activity
+     */
     public RecyclerViewAdapter( Context context,ArrayList<Company> companiesList,int principal) {
         this.context = context;
-        //this.listener = listener;
         this.companyList = companiesList;
         this.companyListFiltered = companiesList;
         this.principal= principal;
     }
 
+    /**
+     * Inner class that is used to hold the views in the row/item layout
+     * it has the variable layout container
+     * it has the Image view variable that will be loaded with
+     * the company logo (stored in the database)
+     * it has text view that displays the company name
+     */
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView image;
         TextView tvName;
         RelativeLayout parent;
 
+        /**
+         * The constructor of view holder inner class,
+         * it takes the whole layout(entier row in the list) and find each sub view in the layout
+         * @param itemView
+         */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.imgCompanyLogo);
@@ -66,18 +78,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @NonNull
     @Override
+    // this method inflates the row/item form the xml file and return a holder
     public RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,int viewtype) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitem,parent,false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
-
+    // this method populates the company name and logo from the database into the row/item throug the holder object
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-
-        //final Company company = companyList.get(position);
+        // the Company object in the list of companies
         final Company company = companyListFiltered.get(position);
-        RequestOptions options = new RequestOptions();
+        RequestOptions options = new RequestOptions(); // load image options using the Glide library
         options.centerInside();
         Glide.with(context).asBitmap().load(company.getLogoLInk()).apply(fitCenterTransform()).into(holder.image);//image Loader
 
@@ -87,9 +99,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
                 Intent intent = new Intent(context,ThirdActivity.class);
 
-                intent.putExtra("company",company);
+                intent.putExtra("company",company);// send the selected company object to the third activity
                 intent.putExtra("Name",company.getName());
-                intent.putExtra("principal",principal);
+                intent.putExtra("principal",principal);// send the entered amount that is extracted from the first activity to the third one
                 context.startActivity(intent);
             }
         });
@@ -97,8 +109,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
+    // returns the total count of the companies in
+    // the arraylist passed in the recycler view constructor
     public int getItemCount() {
-        //return companyList.size();
         return companyListFiltered.size();
     }
 

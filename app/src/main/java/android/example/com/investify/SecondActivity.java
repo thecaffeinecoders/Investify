@@ -34,51 +34,54 @@ public class SecondActivity extends AppCompatActivity {
     RecyclerViewAdapter adapter;
     private SearchView searchView;
     private static DecimalFormat decimalFormat = new DecimalFormat(".##");
-
-   // private ArrayList<String> companyNameList= new ArrayList<>();
-    //private ArrayList <String> companyLogoList= new ArrayList<>();
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("CompanyData");
+    FirebaseDatabase database = FirebaseDatabase.getInstance();// database Instance
+    DatabaseReference myRef = database.getReference("CompanyData");// database reference to particular child in the database
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.left_entry,R.anim.right_exit);
-
         setContentView(R.layout.activity_second);
-
-        //final RecyclerView recyclerView = findViewById(R.id.reviewCompanyList);
-        //final RecyclerViewAdapter adapter = new RecyclerViewAdapter(SecondActivity.this, companiesList);
-
 
         double revenue = getIntent().getDoubleExtra("Revenue",0);
         final int amount = (int) getIntent().getDoubleExtra("Amount",0);
-
         TextView tvInvested = (TextView) findViewById(R.id.tv_valueOfInvestment);
         TextView tvRevenue = (TextView) findViewById(R.id.et_maxProfit);
-
-
         tvInvested.setText(String.valueOf(amount));
         tvRevenue.setText(String.valueOf(decimalFormat.format(revenue-amount)));
-
-
+        /**
+         * the eventlistener is related to the database reference
+         * it triggers whenever some values change
+         */
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
+
+            /**This method is called once with the initial value and again
+             * whenever data at this location is updated.
+             * @param DataSnapshot is the current snapshot of the Firebase Database
+             */
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                companiesList.clear();
+
+                companiesList.clear();// to clear the Arraylist so no duplications occur
+                /* this loop is to read through the database and cast each child in the
+                   Database reference into a company Object
+                   then add this new object to the companiesList
+                */
                 for (DataSnapshot companySnapshot : dataSnapshot.getChildren()) {
                     Company company = companySnapshot.getValue(Company.class);
                     company.setName(companySnapshot.getKey());
                     companiesList.add(company);
-                    Log.d(TAG, "Value is: " + company.toString());
+                    Log.d(TAG, "Value is: " + company.toString());// Logging purposes
                 }
+                /* 1. Find the recyclerView
+                   2. create a new instance of the recyclerView adapter with passing the current activity
+                      and companiesList and the amount from the first activity
+                   3.set the adapter to recyclerView
+                 */
                 recyclerView = findViewById(R.id.reviewCompanyList);
                 adapter = new RecyclerViewAdapter(SecondActivity.this, companiesList,amount);
                 recyclerView.setAdapter(adapter);
-                //adapter.notifyDataSetChanged();
                 recyclerView.setLayoutManager(new LinearLayoutManager(SecondActivity.this));
 
             }
