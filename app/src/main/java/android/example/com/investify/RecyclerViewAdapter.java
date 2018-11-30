@@ -18,7 +18,6 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import static com.bumptech.glide.Glide.with;
 import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
 
@@ -34,12 +33,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context context;
     private List<Company> companyListFiltered;
     private CompanyAdapterListener listener;
+    private double principal;
 
-    public RecyclerViewAdapter( Context context,ArrayList<Company> companiesList) {
+    public RecyclerViewAdapter( Context context,ArrayList<Company> companiesList,double principal) {
         this.context = context;
         //this.listener = listener;
         this.companyList = companiesList;
         this.companyListFiltered = companiesList;
+        this.principal= principal;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -88,10 +89,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 intent.putExtra("company",company);
                 intent.putExtra("Name",company.getName());
+                intent.putExtra("principal",principal);
                 context.startActivity(intent);
             }
         });
-
     }
 
     /**

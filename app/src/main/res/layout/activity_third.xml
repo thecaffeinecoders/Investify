@@ -101,6 +101,7 @@
         </RadioGroup>
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -207,7 +208,7 @@
             android:layout_marginBottom="8dp"
             android:layout_weight="2"
             android:gravity="center"
-            android:hint="Estimate_profit"
+            android:hint="profit"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvCompDesc"
             app:layout_constraintEnd_toEndOf="parent"
@@ -261,5 +262,8 @@
             app:layout_constraintStart_toStartOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
+
+
+
 
 </LinearLayout>

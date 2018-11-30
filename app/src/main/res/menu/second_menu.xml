@@ -7,12 +7,6 @@
 
 
     <item
-        android:id="@+id/contact_us_id"
-        android:title="Contact us"
-        app:showAsAction="never"
-        android:orderInCategory="100" />
-
-    <item
         android:id="@+id/about_us_id"
         android:title="About us"
         app:showAsAction="never"
