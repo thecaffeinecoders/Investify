@@ -81,8 +81,11 @@
                 android:id="@+id/reviewCompanyList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layoutAnimation="@anim/layout_animation_slide_right">
                 android:clipChildren="false"
-                android:clipToPadding="false"></android.support.v7.widget.RecyclerView>
+                android:clipToPadding="false">
+            </android.support.v7.widget.RecyclerView>
+
         </RelativeLayout>
     </android.support.v7.widget.LinearLayoutCompat>
 

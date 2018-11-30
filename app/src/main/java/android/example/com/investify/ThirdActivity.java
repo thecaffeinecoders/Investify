@@ -1,46 +1,31 @@
 package android.example.com.investify;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import android.util.Log;
-
 import android.text.method.ScrollingMovementMethod;
-
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.Series;
-
 import org.apache.commons.math3.stat.regression.SimpleRegression;
-import org.w3c.dom.Text;
-
 import java.text.DecimalFormat;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -58,7 +43,7 @@ public class ThirdActivity extends AppCompatActivity  {
     ArrayList<Double> profitCalculationSource = new ArrayList<>(60);
     private static DecimalFormat decimalFormat = new DecimalFormat(".##");
     Spinner spinner;
-    int amount;
+    double amount;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -71,7 +56,7 @@ public class ThirdActivity extends AppCompatActivity  {
         // get the company object from second activity ,
         // as it is sent as an object it should be getSerializableExtra
         selectedCompany = (Company) i.getSerializableExtra("company");
-        this.amount = i.getIntExtra("principal",0);
+        this.amount = (double) i.getDoubleExtra("principal",0);
         TextView tvComName = (TextView)findViewById(R.id.tvComName);
         tvComName.setText(selectedCompany.name);
 
@@ -263,7 +248,6 @@ public class ThirdActivity extends AppCompatActivity  {
      * @param view
      */
     public void viewWebPage(View view) {
-
         Intent webIntent = new Intent(this,WebViewActivity.class);
         webIntent.putExtra("url",selectedCompany.url);
         startActivity(webIntent);
@@ -275,7 +259,6 @@ public class ThirdActivity extends AppCompatActivity  {
      * @return ArrayList of data points.
      */
     public ArrayList<Double> mostRecent60Months(){
-
         profitCalculationSource.clear();
         int balanceMonthFromCurrentYear;
         int numberOfMonthsFromCurrentYear=0;
@@ -322,7 +305,6 @@ public class ThirdActivity extends AppCompatActivity  {
      * @return Estimated profit
      */
     public double profitEstimateBasedOnPast12Months(){
-
         SimpleRegression recentYearData = new SimpleRegression();
         double slope;
         double intercept;
@@ -338,7 +320,6 @@ public class ThirdActivity extends AppCompatActivity  {
     }
 
     public double yearEstimateBasedOnVaryingMonths(int numberOfYears) {
-
         SimpleRegression recentData = new SimpleRegression();
         double slope;
         double intercept;
@@ -349,7 +330,6 @@ public class ThirdActivity extends AppCompatActivity  {
         }
         intercept = recentData.getIntercept();
         slope = recentData.getSlope();
-
         return (amount/ 100) * ((12 * slope) + intercept);
     }
 
@@ -374,9 +354,7 @@ public class ThirdActivity extends AppCompatActivity  {
                     tv.setText(String.valueOf(decimalFormat.format(yearEstimateBasedOnVaryingMonths(choice))));
                     break;
             }
-
         }
-
         public void onNothingSelected(AdapterView<?> parent) {}
     }
 }

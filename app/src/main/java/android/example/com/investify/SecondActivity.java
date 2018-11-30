@@ -13,16 +13,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Filter;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -34,10 +30,10 @@ public class SecondActivity extends AppCompatActivity {
     RecyclerViewAdapter adapter;
     private SearchView searchView;
     private static DecimalFormat decimalFormat = new DecimalFormat(".##");
+
     FirebaseDatabase database = FirebaseDatabase.getInstance();// database Instance
     DatabaseReference myRef = database.getReference("CompanyData");// database reference to particular child in the database
-
-
+  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +41,13 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
 
         double revenue = getIntent().getDoubleExtra("Revenue",0);
+
         final int amount = (int) getIntent().getDoubleExtra("Amount",0);
         TextView tvInvested = (TextView) findViewById(R.id.tv_valueOfInvestment);
         TextView tvRevenue = (TextView) findViewById(R.id.et_maxProfit);
         tvInvested.setText(String.valueOf(amount));
         tvRevenue.setText(String.valueOf(decimalFormat.format(revenue-amount)));
+      
         /**
          * the eventlistener is related to the database reference
          * it triggers whenever some values change
@@ -83,7 +81,6 @@ public class SecondActivity extends AppCompatActivity {
                 adapter = new RecyclerViewAdapter(SecondActivity.this, companiesList,amount);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(SecondActivity.this));
-
             }
             @Override
             public void onCancelled(DatabaseError error) {
@@ -91,7 +88,6 @@ public class SecondActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
     }
 
     protected void onStart() {
@@ -107,7 +103,6 @@ public class SecondActivity extends AppCompatActivity {
         /**
          * Associate searchable configuration with the SearchView         *
          */
-
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.findItem(R.id.action_search)
                 .getActionView();
@@ -115,7 +110,9 @@ public class SecondActivity extends AppCompatActivity {
                 .getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
 
-        // listening to search query text change
+        /**
+         * listening to search query text change
+         */
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -140,7 +137,6 @@ public class SecondActivity extends AppCompatActivity {
         startActivity(new Intent(this,ThirdActivity.class));
     }
 
-
     // A method for the menu options
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -151,11 +147,12 @@ public class SecondActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-
+    /**
+     * onBackPressed() method: customized for searchView
+     */
     @Override
     public void onBackPressed() {
         // close search view on back button pressed

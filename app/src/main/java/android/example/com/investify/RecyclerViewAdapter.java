@@ -1,7 +1,6 @@
 package android.example.com.investify;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,13 +20,13 @@ import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
  * be displayed in the Recycler View
  */
 
-
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>  {
     private ArrayList<Company> companyList = new ArrayList<Company>();
     private Context context;
     private List<Company> companyListFiltered;
     private CompanyAdapterListener listener;
-    private int principal;
+    private double principal;
+
 
     /**
      * the RecyclerViewAdapter Class constructor
@@ -36,13 +35,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      * @param principal The principal amount the user entered in the first activity
      *                  which will be sent through Intent to the third activity
      */
-    public RecyclerViewAdapter( Context context,ArrayList<Company> companiesList,int principal) {
+    public RecyclerViewAdapter( Context context,ArrayList<Company> companiesList,double principal) {
         this.context = context;
         this.companyList = companiesList;
         this.companyListFiltered = companiesList;
         this.principal= principal;
     }
-
     /**
      * Inner class that is used to hold the views in the row/item layout
      * it has the variable layout container
@@ -54,7 +52,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         ImageView image;
         TextView tvName;
         RelativeLayout parent;
-
+      
         /**
          * The constructor of view holder inner class,
          * it takes the whole layout(entier row in the list) and find each sub view in the layout
@@ -85,6 +83,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return holder;
     }
 
+
     // this method populates the company name and logo from the database into the row/item throug the holder object
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         // the Company object in the list of companies
@@ -92,7 +91,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         RequestOptions options = new RequestOptions(); // load image options using the Glide library
         options.centerInside();
         Glide.with(context).asBitmap().load(company.getLogoLInk()).apply(fitCenterTransform()).into(holder.image);//image Loader
-
         holder.tvName.setText(company.getName());
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,9 +103,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 context.startActivity(intent);
             }
         });
-
     }
 
+    /**
+     * getItemCount() method for filtering
+     * @return
+     */
     @Override
     // returns the total count of the companies in
     // the arraylist passed in the recycler view constructor
@@ -115,7 +116,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return companyListFiltered.size();
     }
 
-
+    /**
+     * Filtering recyclerView items for searching
+     * @return
+     */
     //@Override
     public Filter getFilter() {
         return new Filter() {
@@ -127,17 +131,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 } else {
                     List<Company> filteredList = new ArrayList<>();
                     for (Company row : companyList) {
-
-                        // name match condition. this might differ depending on your requirement
-                        // here we are looking for name or description match
-                        //if (row.getName().toLowerCase().contains(charString.toLowerCase()) || row.getDescription().contains(charSequence)) {
-
                         // here we are looking for only name matching
                         if (row.getName().toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(row);
                         }
                     }
-
                     companyListFiltered = filteredList;
                 }
 
@@ -149,7 +147,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 companyListFiltered = (ArrayList<Company>) filterResults.values;
-
                 // refresh the list (recycler view) with filtered data
                 notifyDataSetChanged();
             }
