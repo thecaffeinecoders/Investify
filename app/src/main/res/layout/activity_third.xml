@@ -47,8 +47,6 @@
             android:layout_weight="1"
             android:textSize="20sp"
             android:textStyle="bold" />
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -61,8 +59,6 @@
             android:layout_width="match_parent"
             android:contentDescription="@string/chart_desc"
             android:layout_height="200dip" />
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -131,7 +127,6 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
@@ -159,7 +154,6 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-
             android:layout_marginTop="8dp"
             android:text="@string/estimated_profit"
             android:textSize="20sp"
@@ -177,7 +171,6 @@
             android:id="@+id/spinNumber"
             android:layout_width="73dp"
             android:layout_height="wrap_content"
-
             android:layout_above="@+id/tvCompDesc"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
@@ -196,9 +189,7 @@
 
         <TextView
             android:id="@+id/tvEstimatedProfit"
-
             android:layout_width="154dp"
-
             android:layout_height="19dp"
             android:layout_above="@+id/tvCompDesc"
             android:layout_alignParentEnd="true"
@@ -214,7 +205,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/spinNumber"></TextView>
-
 
         <TextView
             android:id="@+id/tvCompDesc"
