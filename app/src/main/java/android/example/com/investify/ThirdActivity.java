@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -38,6 +39,9 @@ public class ThirdActivity extends AppCompatActivity  {
     public Company selectedCompany;
     List<Double> values=new ArrayList<>();
     RadioGroup radioGroup;
+    RadioButton oneYear;
+    RadioButton threeYear;
+    RadioButton fiveYear;
     GraphView graph;
     TextView tvCompDesc;
     ArrayList<Double> profitCalculationSource = new ArrayList<>(60);
@@ -57,9 +61,9 @@ public class ThirdActivity extends AppCompatActivity  {
         // as it is sent as an object it should be getSerializableExtra
         selectedCompany = (Company) i.getSerializableExtra("company");
         this.amount = (double) i.getDoubleExtra("principal",0);
-        TextView tvComName = (TextView)findViewById(R.id.tvComName);
+        /*TextView tvComName = (TextView)findViewById(R.id.tvComName);
         tvComName.setText(selectedCompany.name);
-
+*/
         ImageView imgCompLogo = (ImageView)findViewById(R.id.imgCompLogo); // Company Logo ImageView
         Glide.with(this).asBitmap().load(selectedCompany.logoLInk).apply(fitCenterTransform()).into(imgCompLogo); // Load the image
 
@@ -69,6 +73,13 @@ public class ThirdActivity extends AppCompatActivity  {
 
         graph = (GraphView) findViewById(R.id.graph);  // The Chart graph
         radioGroup = (RadioGroup) findViewById(R.id.rgYearChoice);  // Radio buttons for the year options
+        oneYear = (RadioButton) findViewById(R.id.rbOneYear);
+        threeYear = (RadioButton) findViewById(R.id.rbThreeYear);
+        fiveYear = (RadioButton) findViewById(R.id.rbFiveYear);
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        oneYear.setText(String.valueOf(currentYear-1));
+        threeYear.setText(String.valueOf(currentYear-3) + " - " + String.valueOf((currentYear-1)));
+        fiveYear.setText(String.valueOf(currentYear-5) + " - " + String.valueOf((currentYear-1)));
 
         /**
          * A method to call the chartDispaly() based on the selected year option to draw the chart points and line
