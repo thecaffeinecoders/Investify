@@ -33,9 +33,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context context;
     private List<Company> companyListFiltered;
     private CompanyAdapterListener listener;
-    private int principal;
+    private double principal;
 
-    public RecyclerViewAdapter( Context context,ArrayList<Company> companiesList,int principal) {
+    public RecyclerViewAdapter( Context context,ArrayList<Company> companiesList,double principal) {
         this.context = context;
         //this.listener = listener;
         this.companyList = companiesList;
@@ -93,16 +93,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 context.startActivity(intent);
             }
         });
-
     }
 
+    /**
+     * getItemCount() method for filtering
+     * @return
+     */
     @Override
     public int getItemCount() {
         //return companyList.size();
         return companyListFiltered.size();
     }
 
-
+    /**
+     * Filtering recyclerView items for searching
+     * @return
+     */
     //@Override
     public Filter getFilter() {
         return new Filter() {

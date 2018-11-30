@@ -58,7 +58,7 @@ public class ThirdActivity extends AppCompatActivity  {
     ArrayList<Double> profitCalculationSource = new ArrayList<>(60);
     private static DecimalFormat decimalFormat = new DecimalFormat(".##");
     Spinner spinner;
-    int amount;
+    double amount;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class ThirdActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_third);
         Intent i = getIntent();
         selectedCompany = (Company) i.getSerializableExtra("company");
-        this.amount = i.getIntExtra("principal",0);
+        this.amount = (double) i.getDoubleExtra("principal",0);
         TextView tvComName = (TextView)findViewById(R.id.tvComName);
         tvComName.setText(selectedCompany.name);
 
