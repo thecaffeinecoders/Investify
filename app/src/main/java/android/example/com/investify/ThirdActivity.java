@@ -51,7 +51,10 @@ public class ThirdActivity extends AppCompatActivity  {
         overridePendingTransition(R.anim.zoom_entry,R.anim.zoom_exit);
 
         setContentView(R.layout.activity_third);
+
         Intent i = getIntent();
+        // get the company object from second activity ,
+        // as it is sent as an object it should be getSerializableExtra
         selectedCompany = (Company) i.getSerializableExtra("company");
         this.amount = (double) i.getDoubleExtra("principal",0);
         TextView tvComName = (TextView)findViewById(R.id.tvComName);
