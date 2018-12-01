@@ -44,6 +44,7 @@ public class ThirdActivity extends AppCompatActivity  {
     RadioButton fiveYear;
     GraphView graph;
     TextView tvCompDesc;
+    TextView tvAboutComp;
     ArrayList<Double> profitCalculationSource = new ArrayList<>(60);
     private static DecimalFormat decimalFormat = new DecimalFormat(".##");
     Spinner spinner;
@@ -61,11 +62,12 @@ public class ThirdActivity extends AppCompatActivity  {
         // as it is sent as an object it should be getSerializableExtra
         selectedCompany = (Company) i.getSerializableExtra("company");
         this.amount = (double) i.getDoubleExtra("principal",0);
-        /*TextView tvComName = (TextView)findViewById(R.id.tvComName);
-        tvComName.setText(selectedCompany.name);
-*/
+
         ImageView imgCompLogo = (ImageView)findViewById(R.id.imgCompLogo); // Company Logo ImageView
         Glide.with(this).asBitmap().load(selectedCompany.logoLInk).apply(fitCenterTransform()).into(imgCompLogo); // Load the image
+
+        tvAboutComp = (TextView) findViewById(R.id.tvAboutComp); // TextView for th upper part for the company description
+        tvAboutComp.setText("About " + selectedCompany.name);
 
         tvCompDesc=(TextView) findViewById(R.id.tvCompDesc); // Company Description TextView
         tvCompDesc.setMovementMethod(new ScrollingMovementMethod());
