@@ -61,8 +61,9 @@ public class ThirdActivity extends AppCompatActivity  {
         // get the company object from second activity ,
         // as it is sent as an object it should be getSerializableExtra
         selectedCompany = (Company) i.getSerializableExtra("company");
-        this.amount = (double) i.getDoubleExtra("principal",0);
-
+        this.amount = i.getDoubleExtra("Principal",0);
+        TextView tvComName = (TextView)findViewById(R.id.tvComName);
+        tvComName.setText(selectedCompany.name);
         ImageView imgCompLogo = (ImageView)findViewById(R.id.imgCompLogo); // Company Logo ImageView
         Glide.with(this).asBitmap().load(selectedCompany.logoLInk).apply(fitCenterTransform()).into(imgCompLogo); // Load the image
 
@@ -84,7 +85,7 @@ public class ThirdActivity extends AppCompatActivity  {
         fiveYear.setText(String.valueOf(currentYear-5) + " - " + String.valueOf((currentYear-1)));
 
         /**
-         * A method to call the chartDispaly() based on the selected year option to draw the chart points and line
+         * A method to call the chartDisplay() based on the selected year option to draw the chart points and line
          */
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -274,41 +275,29 @@ public class ThirdActivity extends AppCompatActivity  {
     public ArrayList<Double> mostRecent60Months(){
         profitCalculationSource.clear();
         int balanceMonthFromCurrentYear;
-        int numberOfMonthsFromCurrentYear=0;
-        int currentMonth=Calendar.getInstance().get(Calendar.MONTH);
-        String currentYearAsKey=Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+        int numberOfMonthsFromCurrentYear=Calendar.getInstance().get(Calendar.MONTH);//Nov, 10
         int currentYear=Calendar.getInstance().get(Calendar.YEAR);
 
-        for(int i=0; i<currentMonth; i++){
-            numberOfMonthsFromCurrentYear++;
-        }
+        balanceMonthFromCurrentYear=(12-numberOfMonthsFromCurrentYear);//2months
 
-        balanceMonthFromCurrentYear=(11-numberOfMonthsFromCurrentYear);
-
-        //Data from current year
-        for(int i=0; i<=numberOfMonthsFromCurrentYear; i++){
-            ArrayList<Object> perfValuesOfEntireYear = selectedCompany.getPerfValues().get(currentYearAsKey);
-            Object monthValue = perfValuesOfEntireYear.get(i);
-            double valueOfMonth = Double.parseDouble(String.valueOf(monthValue).replace(",","."));
-            profitCalculationSource.add(valueOfMonth);
+        //Data from the 5th year
+        for (int i = balanceMonthFromCurrentYear; i>0; i--) {
+            int j=12-i;
+            profitCalculationSource.add(selectedCompany.performance().get(currentYear-5).get(j));
         }
 
         //Data from the past 4 years
         for( int i=1; i<5; i++){
-            ArrayList<Object> perfValuesOfEntireYear=selectedCompany.getPerfValues().get(Integer.toString(currentYear-i));
-            for(Object object : perfValuesOfEntireYear){
-                double monthValue = Double.parseDouble(String.valueOf(object).replace(",","."));
-                profitCalculationSource.add(monthValue);
+            int j=5-i;
+            ArrayList<Double> annualPerformanceValue=selectedCompany.performance().get(currentYear-j);
+            for(Double monthlyValue : annualPerformanceValue){
+                profitCalculationSource.add(monthlyValue);
             }
         }
 
-        //Data from the 5th year
-        for (int i = 0; i<balanceMonthFromCurrentYear; i++) {
-            int j=11-i;
-            ArrayList<Object> perfValuesOfEntireYear = selectedCompany.getPerfValues().get(Integer.toString(currentYear - 5));
-            Object monthValue = perfValuesOfEntireYear.get(j);
-            double valueOfMonth = Double.parseDouble(String.valueOf(monthValue).replace(",", "."));
-            profitCalculationSource.add(valueOfMonth);
+        //Data from current year
+        for(int i=0; i<numberOfMonthsFromCurrentYear; i++){
+            profitCalculationSource.add(selectedCompany.performance().get(currentYear).get(i));
         }
         return profitCalculationSource;
     }
@@ -323,22 +312,28 @@ public class ThirdActivity extends AppCompatActivity  {
         double intercept;
 
         for(int i=0; i<12; i++){
-            double [][]value={{i,profitCalculationSource.get(i)}};
+            int j=59-i;
+            double [][]value={{i,profitCalculationSource.get(j)}};
             recentYearData.addData(value);
         }
         intercept=recentYearData.getIntercept();
         slope=recentYearData.getSlope();
-
         return (amount/100)*((12*slope)+intercept);
     }
 
+    /**
+     * Collates data depending on years chosen
+     * @param numberOfYears choices in Spinner
+     * @return Profit Calculated
+     */
     public double yearEstimateBasedOnVaryingMonths(int numberOfYears) {
         SimpleRegression recentData = new SimpleRegression();
         double slope;
         double intercept;
 
         for (int i = 0; i < 12 * numberOfYears; i++) {
-            double[][] value = {{i, profitCalculationSource.get(i)}};
+            int j=59-i;
+            double[][] value = {{i, profitCalculationSource.get(j)}};
             recentData.addData(value);
         }
         intercept = recentData.getIntercept();
@@ -346,6 +341,9 @@ public class ThirdActivity extends AppCompatActivity  {
         return (amount/ 100) * ((12 * slope) + intercept);
     }
 
+    /**
+     * Waits for user to choose selection on Spinner and gives the relevant result
+     */
     public class SpinnerOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> parent, View view,

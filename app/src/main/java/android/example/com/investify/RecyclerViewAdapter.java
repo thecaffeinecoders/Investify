@@ -27,7 +27,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private CompanyAdapterListener listener;
     private double principal;
 
-
     /**
      * the RecyclerViewAdapter Class constructor
      * @param context  The activity that contains the Recycler View component
@@ -99,7 +98,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 intent.putExtra("company",company);// send the selected company object to the third activity
                 intent.putExtra("Name",company.getName());
-                intent.putExtra("principal",principal);// send the entered amount that is extracted from the first activity to the third one
+                intent.putExtra("Principal",principal);// send the entered amount that is extracted from the first activity to the third one
                 context.startActivity(intent);
             }
         });

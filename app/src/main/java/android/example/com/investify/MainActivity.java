@@ -13,10 +13,7 @@ import org.apache.commons.math3.stat.regression.SimpleRegression;
 
 public class MainActivity extends AppCompatActivity {
 
-    double intercept;
-    double slope;
     private VideoView mVideoView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +38,6 @@ public class MainActivity extends AppCompatActivity {
                 mediaPlayer.setLooping(true);
             }
         });
-
-        double [][]value = {{1,-1.96},{2,4.61},{3,-3.71},{4,-3.32},{5,-2.37f},{6,-6.94},{7,2.37},{8,5.07},{9,-4.45},{10,5.90},{11,0.36},{12,-0.02}};
-
-        SimpleRegression simpleRegression = new SimpleRegression();
-        simpleRegression.addData(value);
-        this.intercept = simpleRegression.getIntercept();
-        this.slope = simpleRegression.getSlope();
     }
 
     // For VideoView
@@ -60,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
 
     // A temporary method to move to next activity
     public void moveNext(View view) {
+        double principal = readPrincipal(findViewById(R.id.teAmountEnteredToInvest));
         double amount = readPrincipal(findViewById(R.id.teAmountEnteredToInvest));
         Intent intent = new Intent(this,SecondActivity.class);
-        intent.putExtra("Amount", amount);
-        intent.putExtra("Revenue", revenue());
+        intent.putExtra("Principal", principal);
         startActivity(intent);
     }
 
@@ -81,14 +71,5 @@ public class MainActivity extends AppCompatActivity {
         } catch (NumberFormatException e) {
             return 0;
         }
-    }
-
-    public double getPrincipal(){return readPrincipal(findViewById(R.id.teAmountEnteredToInvest));}
-
-    public double revenue(){
-        double revenue;
-        double principal = readPrincipal(findViewById(R.id.teAmountEnteredToInvest));
-        revenue = (principal/100) * ((12*slope)+intercept+100);
-        return revenue;
     }
 }

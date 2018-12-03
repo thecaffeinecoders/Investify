@@ -41,7 +41,7 @@
             android:layout_weight="2"
              />
 
-        <!--<TextView
+        <TextView
             android:id="@+id/tvComName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -49,7 +49,7 @@
             android:hint="Company Name"
             android:layout_weight="1"
             android:textSize="20sp"
-            android:textStyle="bold" />-->
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
