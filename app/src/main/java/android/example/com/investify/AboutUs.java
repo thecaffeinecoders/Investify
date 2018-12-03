@@ -15,7 +15,7 @@ public class AboutUs extends AppCompatActivity {
 
         setContentView(R.layout.activity_about_us);
     }
-
+    // open the developers Linkedin profile upon tapping on her/his name
     public void onClick(View v) {
         String profileLink = null;
 

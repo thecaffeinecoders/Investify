@@ -10,7 +10,7 @@ import com.google.android.youtube.player.YouTubePlayerFragment;
 
 
 public class Information extends AppCompatActivity implements OnInitializedListener{
-
+    // to be able to play youtube video using youtube player API
     private YouTubePlayerFragment playerFragment;
     private YouTubePlayer mPlayer;
     private String YouTubeKey = "AIzaSyA8G10ZSBY9spfwtNJpTT9kktwilE_j27A";
@@ -25,6 +25,7 @@ public class Information extends AppCompatActivity implements OnInitializedListe
         playerFragment.initialize(YouTubeKey, this);
     }
 
+    // play informaive youtube video using youtube player when opening the activity
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,
                                         boolean wasRestored) {
