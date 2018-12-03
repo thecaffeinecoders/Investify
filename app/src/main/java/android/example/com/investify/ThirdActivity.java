@@ -275,33 +275,29 @@ public class ThirdActivity extends AppCompatActivity  {
 
         profitCalculationSource.clear();
         int balanceMonthFromCurrentYear;
-        int numberOfMonthsFromCurrentYear=0;
-        int currentMonth=Calendar.getInstance().get(Calendar.MONTH);
+        int numberOfMonthsFromCurrentYear=Calendar.getInstance().get(Calendar.MONTH);//Nov, 10
         int currentYear=Calendar.getInstance().get(Calendar.YEAR);
 
-        for(int i=0; i<currentMonth; i++){
-            numberOfMonthsFromCurrentYear++;
-        }
+        balanceMonthFromCurrentYear=(12-numberOfMonthsFromCurrentYear);//2months
 
-        balanceMonthFromCurrentYear=(11-numberOfMonthsFromCurrentYear);
-
-        //Data from current year
-        for(int i=0; i<=numberOfMonthsFromCurrentYear; i++){
-            profitCalculationSource.add(selectedCompany.performance().get(currentYear).get(i));
+        //Data from the 5th year
+        for (int i = balanceMonthFromCurrentYear; i>0; i--) {
+            int j=12-i;
+            profitCalculationSource.add(selectedCompany.performance().get(currentYear-5).get(j));
         }
 
         //Data from the past 4 years
         for( int i=1; i<5; i++){
-            ArrayList<Double> perfValuesOfEntireYear=selectedCompany.performance().get(currentYear-i);
-            for(Double monthlyValue : perfValuesOfEntireYear){
+            int j=5-i;
+            ArrayList<Double> annualPerformanceValue=selectedCompany.performance().get(currentYear-j);
+            for(Double monthlyValue : annualPerformanceValue){
                 profitCalculationSource.add(monthlyValue);
             }
         }
 
-        //Data from the 5th year
-        for (int i = 0; i<balanceMonthFromCurrentYear; i++) {
-            int j=11-i;
-            profitCalculationSource.add(selectedCompany.performance().get(currentYear-5).get(j));
+        //Data from current year
+        for(int i=0; i<numberOfMonthsFromCurrentYear; i++){
+            profitCalculationSource.add(selectedCompany.performance().get(currentYear).get(i));
         }
         return profitCalculationSource;
     }
@@ -317,12 +313,12 @@ public class ThirdActivity extends AppCompatActivity  {
         double intercept;
 
         for(int i=0; i<12; i++){
-            double [][]value={{i,profitCalculationSource.get(i)}};
+            int j=59-i;
+            double [][]value={{i,profitCalculationSource.get(j)}};
             recentYearData.addData(value);
         }
         intercept=recentYearData.getIntercept();
         slope=recentYearData.getSlope();
-
         return (amount/100)*((12*slope)+intercept);
     }
 
@@ -333,7 +329,8 @@ public class ThirdActivity extends AppCompatActivity  {
         double intercept;
 
         for (int i = 0; i < 12 * numberOfYears; i++) {
-            double[][] value = {{i, profitCalculationSource.get(i)}};
+            int j=59-i;
+            double[][] value = {{i, profitCalculationSource.get(j)}};
             recentData.addData(value);
         }
         intercept = recentData.getIntercept();

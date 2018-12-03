@@ -180,7 +180,9 @@ public class SecondActivity extends AppCompatActivity {
         double higherProfit=0;
 
         for(Company company:companiesList){
-            profit=profitCalculation(past12MonthsDataForACompany(company));
+            ArrayList<Double> annualPerformance = past12MonthsDataForACompany(company);
+            profit=profitCalculation(annualPerformance);
+            past12MonthsDataForACompany(company).clear();
             if(profit>higherProfit){
                 higherProfit=profit;
             }
@@ -194,17 +196,17 @@ public class SecondActivity extends AppCompatActivity {
      * @return List of 12 data points
      */
     private ArrayList<Double> past12MonthsDataForACompany(Company company){
-        int currentYear=Calendar.getInstance().get(Calendar.YEAR);
-        int monthsFromCurrentYear=Calendar.getInstance().get(Calendar.MONTH);
-        int monthsFromLastYear=11-monthsFromCurrentYear;
-        ArrayList<Double> data=new ArrayList<>(12);
+        int currentYear=Calendar.getInstance().get(Calendar.YEAR); //2018
+        int monthsFromCurrentYear=Calendar.getInstance().get(Calendar.MONTH);//Nov:10
+        int monthsFromLastYear=12-monthsFromCurrentYear;//2months
+        ArrayList<Double> data=new ArrayList<>();
 
+        for(int i=monthsFromLastYear; i>0;i--){
+            int j=12-i;
+            data.add(company.performance().get(currentYear-1).get(j));//gets Nov 2017 & Dec 2017
+        }
         for(int i=0; i<monthsFromCurrentYear;i++){
             data.add(company.performance().get(currentYear).get(i));
-        }
-        for(int i=0; i<monthsFromLastYear;i++){
-            int j=11-i;
-            data.add(company.performance().get(currentYear-1).get(j));
         }
        return data;
     }
@@ -220,7 +222,8 @@ public class SecondActivity extends AppCompatActivity {
         double intercept;
 
         for(int i=0;i<data.size();i++){
-            double[][]dataPoints={{i,data.get(i)}};
+            int j=11-i;
+            double[][]dataPoints={{i,data.get(j)}};
             recentYearData.addData(dataPoints);
         }
         intercept=recentYearData.getIntercept();
