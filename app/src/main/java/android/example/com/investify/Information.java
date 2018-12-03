@@ -8,7 +8,9 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayer.OnInitializedListener;
 import com.google.android.youtube.player.YouTubePlayerFragment;
 
+
 public class Information extends AppCompatActivity implements OnInitializedListener{
+
     private YouTubePlayerFragment playerFragment;
     private YouTubePlayer mPlayer;
     private String YouTubeKey = "AIzaSyA8G10ZSBY9spfwtNJpTT9kktwilE_j27A";

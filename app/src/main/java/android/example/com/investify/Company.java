@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * the class that models the company object in the database
+ */
 
 public class Company implements Serializable {
     String name;
@@ -37,6 +40,15 @@ public class Company implements Serializable {
         return perfValues;
     }
 
+    /**
+     * the Company Class constructor
+     * @param name of the company
+     * @param description
+     * @param logoLInk the link where the logo is stored
+     * @param perfValues the performance value information
+     *                   that is stored in a hashMap that stores years as keys and months as values
+     * @param url stores the company website address
+     */
     public Company(String name, String description, String logoLInk, HashMap<String, ArrayList<Object>> perfValues,String url) {
         this.name = name;
         this.description = description;

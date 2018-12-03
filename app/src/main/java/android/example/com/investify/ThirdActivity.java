@@ -1,46 +1,32 @@
 package android.example.com.investify;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import android.util.Log;
-
 import android.text.method.ScrollingMovementMethod;
-
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.Series;
-
 import org.apache.commons.math3.stat.regression.SimpleRegression;
-import org.w3c.dom.Text;
-
 import java.text.DecimalFormat;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -53,8 +39,12 @@ public class ThirdActivity extends AppCompatActivity  {
     public Company selectedCompany;
     List<Double> values=new ArrayList<>();
     RadioGroup radioGroup;
+    RadioButton oneYear;
+    RadioButton threeYear;
+    RadioButton fiveYear;
     GraphView graph;
     TextView tvCompDesc;
+    TextView tvAboutComp;
     ArrayList<Double> profitCalculationSource = new ArrayList<>(60);
     private static DecimalFormat decimalFormat = new DecimalFormat(".##");
     Spinner spinner;
@@ -66,14 +56,19 @@ public class ThirdActivity extends AppCompatActivity  {
         overridePendingTransition(R.anim.zoom_entry,R.anim.zoom_exit);
 
         setContentView(R.layout.activity_third);
+
         Intent i = getIntent();
+        // get the company object from second activity ,
+        // as it is sent as an object it should be getSerializableExtra
         selectedCompany = (Company) i.getSerializableExtra("company");
         this.amount = i.getDoubleExtra("Principal",0);
         TextView tvComName = (TextView)findViewById(R.id.tvComName);
         tvComName.setText(selectedCompany.name);
-
         ImageView imgCompLogo = (ImageView)findViewById(R.id.imgCompLogo); // Company Logo ImageView
         Glide.with(this).asBitmap().load(selectedCompany.logoLInk).apply(fitCenterTransform()).into(imgCompLogo); // Load the image
+
+        tvAboutComp = (TextView) findViewById(R.id.tvAboutComp); // TextView for th upper part for the company description
+        tvAboutComp.setText("About " + selectedCompany.name);
 
         tvCompDesc=(TextView) findViewById(R.id.tvCompDesc); // Company Description TextView
         tvCompDesc.setMovementMethod(new ScrollingMovementMethod());
@@ -81,6 +76,13 @@ public class ThirdActivity extends AppCompatActivity  {
 
         graph = (GraphView) findViewById(R.id.graph);  // The Chart graph
         radioGroup = (RadioGroup) findViewById(R.id.rgYearChoice);  // Radio buttons for the year options
+        oneYear = (RadioButton) findViewById(R.id.rbOneYear);
+        threeYear = (RadioButton) findViewById(R.id.rbThreeYear);
+        fiveYear = (RadioButton) findViewById(R.id.rbFiveYear);
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        oneYear.setText(String.valueOf(currentYear-1));
+        threeYear.setText(String.valueOf(currentYear-3) + " - " + String.valueOf((currentYear-1)));
+        fiveYear.setText(String.valueOf(currentYear-5) + " - " + String.valueOf((currentYear-1)));
 
         /**
          * A method to call the chartDisplay() based on the selected year option to draw the chart points and line
@@ -260,7 +262,6 @@ public class ThirdActivity extends AppCompatActivity  {
      * @param view
      */
     public void viewWebPage(View view) {
-
         Intent webIntent = new Intent(this,WebViewActivity.class);
         webIntent.putExtra("url",selectedCompany.url);
         startActivity(webIntent);
@@ -272,7 +273,6 @@ public class ThirdActivity extends AppCompatActivity  {
      * @return ArrayList of data points.
      */
     public ArrayList<Double> mostRecent60Months(){
-
         profitCalculationSource.clear();
         int balanceMonthFromCurrentYear;
         int numberOfMonthsFromCurrentYear=Calendar.getInstance().get(Calendar.MONTH);//Nov, 10
@@ -307,7 +307,6 @@ public class ThirdActivity extends AppCompatActivity  {
      * @return Estimated profit
      */
     public double profitEstimateBasedOnPast12Months(){
-
         SimpleRegression recentYearData = new SimpleRegression();
         double slope;
         double intercept;
@@ -322,8 +321,12 @@ public class ThirdActivity extends AppCompatActivity  {
         return (amount/100)*((12*slope)+intercept);
     }
 
+    /**
+     * Collates data depending on years chosen
+     * @param numberOfYears choices in Spinner
+     * @return Profit Calculated
+     */
     public double yearEstimateBasedOnVaryingMonths(int numberOfYears) {
-
         SimpleRegression recentData = new SimpleRegression();
         double slope;
         double intercept;
@@ -335,10 +338,12 @@ public class ThirdActivity extends AppCompatActivity  {
         }
         intercept = recentData.getIntercept();
         slope = recentData.getSlope();
-
         return (amount/ 100) * ((12 * slope) + intercept);
     }
 
+    /**
+     * Waits for user to choose selection on Spinner and gives the relevant result
+     */
     public class SpinnerOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> parent, View view,
@@ -360,9 +365,7 @@ public class ThirdActivity extends AppCompatActivity  {
                     tv.setText(String.valueOf(decimalFormat.format(yearEstimateBasedOnVaryingMonths(choice))));
                     break;
             }
-
         }
-
         public void onNothingSelected(AdapterView<?> parent) {}
     }
 }
