@@ -27,7 +27,7 @@
                 tools:layout="@layout/activity_information" />
 
             <TextView
-                android:id="@+id/guid_title"
+                android:id="@+id/tvGuid_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="16dp"
@@ -37,7 +37,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/first_header"
+                android:id="@+id/tvFirst_header"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="16dp"
@@ -47,16 +47,16 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/first_body"
+                android:id="@+id/tvFirst_body"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="16dp"
                 android:scrollbars="vertical"
                 android:text="@string/simply_put_asset_management_firms_manage_funds_for_individuals_and_companies_they_make_well_timed_investment_decisions_on_behalf_of_their_clients_to_grow_their_finances_and_portfolio_working_with_a_group_of_several_investors_asset_management_firms_are_able_to_diversify_their_clients_portfolios_this_gives_them_access_to_higher_value_options_with_better_capital_appreciation_prospects_as_well_as_mitigating_the_associated_risk_these_pooled_funds_can_be_channelled_into_property_shares_bonds_or_other_assets_depending_on_the_financial_objectives_of_their_clients_for_example_the_stock_market_can_deliver_fast_returns_whereas_property_is_ideal_for_long_term_asset_management"
-                android:textSize="16sp" />
+                android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/second_header"
+                android:id="@+id/tvSecond_header"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="16dp"
@@ -66,13 +66,13 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/second_body"
+                android:id="@+id/tvSecond_body"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="16dp"
                 android:scrollbars="vertical"
                 android:text="@string/the_more_profit_they_make_for_their_clients_the_more_money_investment_management_firms_make_they_charge_their_clients_a_management_fee_and_take_a_percentage_of_the_profits_from_the_investments"
-                android:textSize="16sp" />
+                android:textSize="17sp" />
         </LinearLayout>
     </ScrollView>
 
