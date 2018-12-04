@@ -14,14 +14,14 @@
     <string name="search_hint">Search the company name...</string>
     <string name="search_title">Search</string>
     <string name="yourInvestment">Your investment:\u00A0</string>
-    <string name="profit">Profit*:\u00A0</string>
+    <string name="profit">Profit:\u00A0</string>
     <string name="about_us">About us  </string>
     <string name="the_caffeine_coders_team">The Caffeine coders team</string>
     <string name="dima_alissa">Dima Alissa</string>
     <string name="hossin_algerf">Hossin Algerf</string>
     <string name="radhika_jayaraman">Radhika Jayaraman</string>
     <string name="tamer_alnoami">Tamer Alnoami</string>
-    <string name="chen_zhi">Chen Zhi</string>
+    <string name="chen_zhi">Zhi Chen</string>
     <string name="adem_sezer">Adem Sezer</string>
 
     <string-array name="spinner_content">

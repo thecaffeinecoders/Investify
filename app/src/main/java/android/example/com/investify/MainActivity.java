@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
     // A temporary method to move to next activity
     public void moveNext(View view) {
         double principal = readPrincipal(findViewById(R.id.teAmountEnteredToInvest));
-        double amount = readPrincipal(findViewById(R.id.teAmountEnteredToInvest));
         Intent intent = new Intent(this,SecondActivity.class);
         intent.putExtra("Principal", principal);
         startActivity(intent);

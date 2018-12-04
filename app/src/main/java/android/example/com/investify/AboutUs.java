@@ -11,7 +11,7 @@ public class AboutUs extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.left_entry,R.anim.left_exit);
+        overridePendingTransition(R.anim.left_entry, R.anim.left_exit);
 
         setContentView(R.layout.activity_about_us);
     }
