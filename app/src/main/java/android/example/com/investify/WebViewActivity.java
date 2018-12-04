@@ -6,6 +6,7 @@ import android.view.KeyEvent;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+
 public class WebViewActivity extends AppCompatActivity {
     private WebView webView;
 
@@ -15,16 +16,21 @@ public class WebViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
 
-        String LoadURL= getIntent().getStringExtra("url");
+        String loadURL= getIntent().getStringExtra("url");
 
         webView = findViewById(R.id.webView1);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
+
+        //enable zoom in and out without displaying the zoom buttons
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setDisplayZoomControls(false);
 
-        webView.loadUrl(LoadURL);
+        webView.loadUrl(loadURL);
     }
+    /** to use the android standard back navigation buttons to navigate back within the web view , instead
+     * of closing it
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN) {

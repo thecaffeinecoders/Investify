@@ -71,4 +71,8 @@ public class MainActivity extends AppCompatActivity {
             return 0;
         }
     }
+    //Show information activity
+    public void showInfo (View iview){
+        startActivity (new Intent(this,Information.class));
+    }
 }
