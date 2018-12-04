@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -83,6 +84,9 @@ public class ThirdActivity extends AppCompatActivity  {
         oneYear.setText(String.valueOf(currentYear-1));
         threeYear.setText(String.valueOf(currentYear-3) + " - " + String.valueOf((currentYear-1)));
         fiveYear.setText(String.valueOf(currentYear-5) + " - " + String.valueOf((currentYear-1)));
+        //set the webview button text
+        Button mButton=(Button)findViewById(R.id.btnWebView);
+        mButton.setText("Visit " + selectedCompany.name );
 
         /**
          * A method to call the chartDisplay() based on the selected year option to draw the chart points and line
@@ -258,7 +262,8 @@ public class ThirdActivity extends AppCompatActivity  {
     }
 
     /**
-     * A method for the button "visit the company web page" to open the webview activity
+     * A method for the button that launches WebView activity
+     * to display the home page of the already selected company .
      * @param view
      */
     public void viewWebPage(View view) {
