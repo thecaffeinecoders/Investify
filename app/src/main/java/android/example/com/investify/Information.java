@@ -2,7 +2,6 @@ package android.example.com.investify;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayer.OnInitializedListener;
@@ -25,7 +24,12 @@ public class Information extends AppCompatActivity implements OnInitializedListe
         playerFragment.initialize(YouTubeKey, this);
     }
 
-    /** play informaive YouTube video using youtube player when opening the activity
+    /**
+     * Plays informative YouTube video
+     *
+     * @param provider
+     * @param player
+     * @param wasRestored
      */
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,
@@ -44,9 +48,7 @@ public class Information extends AppCompatActivity implements OnInitializedListe
         if (!wasRestored) {
             // provide the unique ID of the YouTube video that will be played ;
             mPlayer.loadVideo("TMm45JvmXKo");
-        }
-        else
-        {
+        } else {
             mPlayer.play();
         }
     }

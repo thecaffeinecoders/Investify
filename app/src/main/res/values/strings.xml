@@ -3,8 +3,8 @@
     <string name="investify">Investify</string>
     <string name="amount_you_want_to_invest">Amount you want to invest</string>
     <string name="check_possible_profits">Projected profits</string>
-    <string name="estimated_profit">Estimated Profit</string>
-    <string name="year">Year</string>
+    <string name="estimated_profit">Estimated Profit*</string>
+    <string name="year">Year(s)</string>
     <string name="chart_desc">The company performance chart</string>
     <string name="about_asset">About asset management firms</string>
     <string name="what_are">What are asset management firms ?</string>
@@ -21,9 +21,10 @@
     <string name="hossin_algerf">Hossin Algerf</string>
     <string name="radhika_jayaraman">Radhika Jayaraman</string>
     <string name="tamer_alnoami">Tamer Alnoami</string>
-    <string name="chen_zhi">Chen Zhi</string>
+    <string name="chen_zhi">Zhi Chen</string>
     <string name="adem_sezer">Adem Sezer</string>
-    <string name="all_profits">* All profits shown in this application are calculated for a 12-months investment period .</string>
+    <string name="all_profits">* All estimated profits shown in this application are calculated for a 12-months investment period .</string>
+    <string name="instruction">Select year(s) for basis of calculation</string>
 
     <string-array name="spinner_content">
         <item>1</item>

@@ -35,10 +35,10 @@ import java.util.List;
 
 import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
 
-public class ThirdActivity extends AppCompatActivity  {
+public class ThirdActivity extends AppCompatActivity {
 
     public Company selectedCompany;
-    List<Double> values=new ArrayList<>();
+    List<Double> values = new ArrayList<>();
     RadioGroup radioGroup;
     RadioButton oneYear;
     RadioButton threeYear;
@@ -54,24 +54,24 @@ public class ThirdActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.zoom_entry,R.anim.zoom_exit);
+        overridePendingTransition(R.anim.zoom_entry, R.anim.zoom_exit);
 
         setContentView(R.layout.activity_third);
 
         Intent i = getIntent();
-        // get the company object from second activity ,
-        // as it is sent as an object it should be getSerializableExtra
+        // Get the company object from second activity,
+        // it is sent as an object it should be getSerializableExtra
         selectedCompany = (Company) i.getSerializableExtra("company");
-        this.amount = i.getDoubleExtra("Principal",0);
-        TextView tvComName = (TextView)findViewById(R.id.tvComName);
+        this.amount = i.getDoubleExtra("Principal", 0);
+        TextView tvComName = (TextView) findViewById(R.id.tvComName);
         tvComName.setText(selectedCompany.name);
-        ImageView imgCompLogo = (ImageView)findViewById(R.id.imgCompLogo); // Company Logo ImageView
+        ImageView imgCompLogo = (ImageView) findViewById(R.id.imgCompLogo); // Company Logo ImageView
         Glide.with(this).asBitmap().load(selectedCompany.logoLInk).apply(fitCenterTransform()).into(imgCompLogo); // Load the image
 
         tvAboutComp = (TextView) findViewById(R.id.tvAboutComp); // TextView for th upper part for the company description
         tvAboutComp.setText("About " + selectedCompany.name);
 
-        tvCompDesc=(TextView) findViewById(R.id.tvCompDesc); // Company Description TextView
+        tvCompDesc = (TextView) findViewById(R.id.tvCompDesc); // Company Description TextView
         tvCompDesc.setMovementMethod(new ScrollingMovementMethod());
         tvCompDesc.setText(selectedCompany.description);
 
@@ -81,22 +81,20 @@ public class ThirdActivity extends AppCompatActivity  {
         threeYear = (RadioButton) findViewById(R.id.rbThreeYear);
         fiveYear = (RadioButton) findViewById(R.id.rbFiveYear);
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        oneYear.setText(String.valueOf(currentYear-1));
-        threeYear.setText(String.valueOf(currentYear-3) + " - " + String.valueOf((currentYear-1)));
-        fiveYear.setText(String.valueOf(currentYear-5) + " - " + String.valueOf((currentYear-1)));
-        //set the webview button text
-        Button mButton=(Button)findViewById(R.id.btnWebView);
-        mButton.setText("Visit " + selectedCompany.name );
+        oneYear.setText(String.valueOf(currentYear - 1));
+        threeYear.setText(String.valueOf(currentYear - 3) + " - " + String.valueOf((currentYear - 1)));
+        fiveYear.setText(String.valueOf(currentYear - 5) + " - " + String.valueOf((currentYear - 1)));
+        //Set the webview button text
+        Button mButton = (Button) findViewById(R.id.btnWebView);
+        mButton.setText("Visit " + selectedCompany.name);
 
-        /**
-         * A method to call the chartDisplay() based on the selected year option to draw the chart points and line
-         */
+        //Calls thechartDisplay() based on user choice to draw chart points and line
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(checkedId == R.id.rbOneYear)
+                if (checkedId == R.id.rbOneYear)
                     chartDisplay(1);
-                else if(checkedId == R.id.rbThreeYear)
+                else if (checkedId == R.id.rbThreeYear)
                     chartDisplay(3);
                 else
                     chartDisplay(5);
@@ -115,33 +113,33 @@ public class ThirdActivity extends AppCompatActivity  {
     }
 
     /**
-    * A method to draw the chart series and the lines using the SimpleRegression Class
-    * @param year Integer value to select drawing the chart based on the year choice
-    */
+     * A method to draw the chart series and the lines using the SimpleRegression Class
+     *
+     * @param year Integer value to select drawing the chart based on the year choice
+     */
     private void chartDisplay(int year) {
 
         graph.removeAllSeries(); // clear the graph each time calling the method
         values.clear(); // Clear the datapoint values to re fill it again
 
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        HashMap<Integer,ArrayList<Double>> perValues = selectedCompany.performance();
+        HashMap<Integer, ArrayList<Double>> perValues = selectedCompany.performance();
 
-        switch (year)
-        {
+        switch (year) {
             case 1:
-                for(int j=year ; j >0; j--)
-                    for(int i=0;i<12;i++)
-                        values.add(perValues.get(currentYear-j).get(i)); //Filling the datapoint values ArrayList
+                for (int j = year; j > 0; j--)
+                    for (int i = 0; i < 12; i++)
+                        values.add(perValues.get(currentYear - j).get(i)); //Filling the datapoint values ArrayList
                 break;
             case 3:
-                for(int j=year ; j >0; j--)
-                    for(int i=0;i<12;i++)
-                        values.add(perValues.get(currentYear-j).get(i)); //Filling the datapoint values ArrayList
+                for (int j = year; j > 0; j--)
+                    for (int i = 0; i < 12; i++)
+                        values.add(perValues.get(currentYear - j).get(i)); //Filling the datapoint values ArrayList
                 break;
             case 5:
-                for(int j=year ; j >0; j--)
-                    for(int i=0;i<12;i++)
-                        values.add(perValues.get(currentYear-j).get(i)); //Filling the datapoint values ArrayList
+                for (int j = year; j > 0; j--)
+                    for (int i = 0; i < 12; i++)
+                        values.add(perValues.get(currentYear - j).get(i)); //Filling the datapoint values ArrayList
                 break;
         }
 
@@ -150,7 +148,7 @@ public class ThirdActivity extends AppCompatActivity  {
         DataPoint[] dataPoints = new DataPoint[values.size()]; // Creating the DataPoint based the year option
         for (int i = 0; i < values.size(); i++) {
             dataPoints[i] = new DataPoint(i + 1, values.get(i)); // Filling the Data Point [X][Y] from the values ArrayList
-            simpleRegression.addData(i+1,values.get(i)); // Feeding the simpleRegression with the data to get the slope and the intercept
+            simpleRegression.addData(i + 1, values.get(i)); // Feeding the simpleRegression with the data to get the slope and the intercept
         }
 
         // This will display the line in the chart
@@ -168,39 +166,36 @@ public class ThirdActivity extends AppCompatActivity  {
              */
             @Override
             public void onTap(Series series, DataPointInterface dataPoint) {
-                Toast.makeText(getApplicationContext(), "Performance: On Data Point clicked [month/profit%]: "+dataPoint, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Performance: On Data Point clicked [month/profit%]: " + dataPoint, Toast.LENGTH_SHORT).show();
             }
         });
 
         // Best fit line calculation and drawing
         double intercept = simpleRegression.getIntercept();
         double slope = simpleRegression.getSlope();
-        double y = intercept + slope * values.size() ;
+        double y = intercept + slope * values.size();
         Double[] xAxis = new Double[2];
         Double[] yAxis = new Double[2];
-        xAxis[0]=0d;
-        yAxis[0]=intercept;
-        xAxis[1]= Double.valueOf(values.size());
-        yAxis[1]=y;
+        xAxis[0] = 0d;
+        yAxis[0] = intercept;
+        xAxis[1] = Double.valueOf(values.size());
+        yAxis[1] = y;
 
         GraphView line_graph = (GraphView) findViewById(R.id.graph);
         DataPoint[] dataPoint = new DataPoint[xAxis.length];
 
         for (int i = 0; i < xAxis.length; i++)
-            dataPoint[i] = new DataPoint(xAxis[i],yAxis[i]);
+            dataPoint[i] = new DataPoint(xAxis[i], yAxis[i]);
 
         LineGraphSeries<DataPoint> line_series = new LineGraphSeries<DataPoint>(dataPoint);
 
-        series.setColor(Color.rgb(0,0,255));
+        series.setColor(Color.rgb(0, 0, 255));
         line_series.setColor(Color.rgb(255, 0, 0));
         line_series.setTitle("Best fit line");
         line_graph.addSeries(line_series);
-
         // End of best fit line
 
-        /**
-         * A method to label the Xasis and Yasis
-         */
+        //A method to label the Xasis and Yasis
         graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
             @Override
             public String formatLabel(double value, boolean isValueX) {
@@ -219,14 +214,13 @@ public class ThirdActivity extends AppCompatActivity  {
         graph.getViewport().setMaxX(values.size());
 
         graph.getGridLabelRenderer().setVerticalAxisTitle("Performance");
-        graph.getGridLabelRenderer().setVerticalAxisTitleColor(Color.rgb(0,0,205));
+        graph.getGridLabelRenderer().setVerticalAxisTitleColor(Color.rgb(0, 0, 205));
         graph.getGridLabelRenderer().setVerticalAxisTitleTextSize(40f);
         graph.getGridLabelRenderer().setLabelVerticalWidth(25);
 
         graph.getGridLabelRenderer().setHorizontalAxisTitle("Months");
-        graph.getGridLabelRenderer().setHorizontalAxisTitleColor(Color.rgb(0,0,205));
+        graph.getGridLabelRenderer().setHorizontalAxisTitleColor(Color.rgb(0, 0, 205));
         graph.getGridLabelRenderer().setHorizontalAxisTitleTextSize(40f);
-
 
 
         //graph.getGridLabelRenderer().setHorizontalLabelsAngle(22);
@@ -239,14 +233,15 @@ public class ThirdActivity extends AppCompatActivity  {
     //To activate the menu on this activity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater= getMenuInflater();
-        inflater.inflate(R.menu.second_menu,menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.second_menu, menu);
         return true;
     }
 
 
     /**
      * A method for the Action menu selected item
+     *
      * @param item
      * @return
      */
@@ -254,7 +249,7 @@ public class ThirdActivity extends AppCompatActivity  {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.about_us_id:
-                Intent intent = new Intent(this,AboutUs.class);
+                Intent intent = new Intent(this, AboutUs.class);
                 startActivity(intent);
                 break;
         }
@@ -262,46 +257,48 @@ public class ThirdActivity extends AppCompatActivity  {
     }
 
     /**
-     * A method for the button that launches WebView activity
+     * Launches WebView activity
      * to display the home page of the already selected company .
+     *
      * @param view
      */
     public void viewWebPage(View view) {
-        Intent webIntent = new Intent(this,WebViewActivity.class);
-        webIntent.putExtra("url",selectedCompany.url);
+        Intent webIntent = new Intent(this, WebViewActivity.class);
+        webIntent.putExtra("url", selectedCompany.url);
         startActivity(webIntent);
     }
 
     /**
      * Collates the 60 most recent data points.
      * Order of addition does affect our result.
+     *
      * @return ArrayList of data points.
      */
-    public ArrayList<Double> mostRecent60Months(){
+    public ArrayList<Double> mostRecent60Months() {
         profitCalculationSource.clear();
         int balanceMonthFromCurrentYear;
-        int numberOfMonthsFromCurrentYear=Calendar.getInstance().get(Calendar.MONTH);//Nov, 10
-        int currentYear=Calendar.getInstance().get(Calendar.YEAR);
+        int numberOfMonthsFromCurrentYear = Calendar.getInstance().get(Calendar.MONTH);//Nov, 10
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 
-        balanceMonthFromCurrentYear=(12-numberOfMonthsFromCurrentYear);//2months
+        balanceMonthFromCurrentYear = (12 - numberOfMonthsFromCurrentYear);//2months
 
         //Data from the 5th year
-        for (int i = balanceMonthFromCurrentYear; i>0; i--) {
-            int j=12-i;
-            profitCalculationSource.add(selectedCompany.performance().get(currentYear-5).get(j));
+        for (int i = balanceMonthFromCurrentYear; i > 0; i--) {
+            int j = 12 - i;
+            profitCalculationSource.add(selectedCompany.performance().get(currentYear - 5).get(j));
         }
 
         //Data from the past 4 years
-        for( int i=1; i<5; i++){
-            int j=5-i;
-            ArrayList<Double> annualPerformanceValue=selectedCompany.performance().get(currentYear-j);
-            for(Double monthlyValue : annualPerformanceValue){
+        for (int i = 1; i < 5; i++) {
+            int j = 5 - i;
+            ArrayList<Double> annualPerformanceValue = selectedCompany.performance().get(currentYear - j);
+            for (Double monthlyValue : annualPerformanceValue) {
                 profitCalculationSource.add(monthlyValue);
             }
         }
 
         //Data from current year
-        for(int i=0; i<numberOfMonthsFromCurrentYear; i++){
+        for (int i = 0; i < numberOfMonthsFromCurrentYear; i++) {
             profitCalculationSource.add(selectedCompany.performance().get(currentYear).get(i));
         }
         return profitCalculationSource;
@@ -309,25 +306,27 @@ public class ThirdActivity extends AppCompatActivity  {
 
     /**
      * Estimates profit based on past 12 months' performance
+     *
      * @return Estimated profit
      */
-    public double profitEstimateBasedOnPast12Months(){
+    public double profitEstimateBasedOnPast12Months() {
         SimpleRegression recentYearData = new SimpleRegression();
         double slope;
         double intercept;
 
-        for(int i=0; i<12; i++){
-            int j=59-i;
-            double [][]value={{i,profitCalculationSource.get(j)}};
+        for (int i = 0; i < 12; i++) {
+            int j = 59 - i;
+            double[][] value = {{i, profitCalculationSource.get(j)}};
             recentYearData.addData(value);
         }
-        intercept=recentYearData.getIntercept();
-        slope=recentYearData.getSlope();
-        return (amount/100)*((12*slope)+intercept);
+        intercept = recentYearData.getIntercept();
+        slope = recentYearData.getSlope();
+        return (amount / 100) * ((12 * slope) + intercept);
     }
 
     /**
      * Collates data depending on years chosen
+     *
      * @param numberOfYears choices in Spinner
      * @return Profit Calculated
      */
@@ -337,13 +336,13 @@ public class ThirdActivity extends AppCompatActivity  {
         double intercept;
 
         for (int i = 0; i < 12 * numberOfYears; i++) {
-            int j=59-i;
+            int j = 59 - i;
             double[][] value = {{i, profitCalculationSource.get(j)}};
             recentData.addData(value);
         }
         intercept = recentData.getIntercept();
         slope = recentData.getSlope();
-        return (amount/ 100) * ((12 * slope) + intercept);
+        return (amount / 100) * ((12 * slope) + intercept);
     }
 
     /**
@@ -356,8 +355,7 @@ public class ThirdActivity extends AppCompatActivity  {
 
             TextView tv = (TextView) findViewById(R.id.tvEstimatedProfit);
             int choice = Integer.valueOf(parent.getSelectedItem().toString());
-            switch (pos)
-            {
+            switch (pos) {
                 case 0:
                     tv.setText(String.valueOf(decimalFormat.format(profitEstimateBasedOnPast12Months())));
                     break;
@@ -371,6 +369,8 @@ public class ThirdActivity extends AppCompatActivity  {
                     break;
             }
         }
-        public void onNothingSelected(AdapterView<?> parent) {}
+
+        public void onNothingSelected(AdapterView<?> parent) {
+        }
     }
 }

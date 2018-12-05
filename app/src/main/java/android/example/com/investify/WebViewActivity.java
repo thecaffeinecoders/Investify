@@ -16,7 +16,7 @@ public class WebViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
 
-        String loadURL= getIntent().getStringExtra("url");
+        String loadURL = getIntent().getStringExtra("url");
 
         webView = findViewById(R.id.webView1);
         webView.getSettings().setJavaScriptEnabled(true);
@@ -28,8 +28,14 @@ public class WebViewActivity extends AppCompatActivity {
 
         webView.loadUrl(loadURL);
     }
-    /** to use the android standard back navigation buttons to navigate back within the web view , instead
+
+    /**
+     * Uses android standard back navigation buttons to navigate back within the web view , instead
      * of closing it
+     *
+     * @param keyCode
+     * @param event
+     * @return
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

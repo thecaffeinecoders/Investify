@@ -26,7 +26,7 @@ import java.util.Calendar;
 
 public class SecondActivity extends AppCompatActivity {
     private static final String TAG = "SecondActivity";
-    private ArrayList<Company> companiesList= new ArrayList<>();
+    private ArrayList<Company> companiesList = new ArrayList<>();
     private RecyclerView recyclerView;
     RecyclerViewAdapter adapter;
     private SearchView searchView;
@@ -38,16 +38,16 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.left_entry,R.anim.right_exit);
+        overridePendingTransition(R.anim.left_entry, R.anim.right_exit);
         setContentView(R.layout.activity_second);
-        this.principal = getIntent().getDoubleExtra("Principal",0);
+        this.principal = getIntent().getDoubleExtra("Principal", 0);
         TextView tvInvested = (TextView) findViewById(R.id.tv_valueOfInvestment);
         final TextView tvRevenue = (TextView) findViewById(R.id.et_maxProfit);
         tvInvested.setText(String.valueOf(decimalFormat.format(principal)));
-        /**
-         * the eventlistener is related to the database reference
-         * it triggers whenever some values change
-         */
+
+        //Eventlistener is related to the database reference
+        //Waits for values to change before method is activated
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
 
@@ -69,17 +69,18 @@ public class SecondActivity extends AppCompatActivity {
                     Log.d(TAG, "Value is: " + company.toString());// Logging purposes
                 }
                 /* 1. Find the recyclerView
-                   2. create a new instance of the recyclerView adapter with passing the current activity
+                   2. Create a new instance of the recyclerView adapter with passing the current activity
                       and companiesList and the amount from the first activity
-                   3.set the adapter to recyclerView
+                   3. Set the adapter to recyclerView
                  */
                 recyclerView = findViewById(R.id.reviewCompanyList);
-                adapter = new RecyclerViewAdapter(SecondActivity.this, companiesList,principal);
+                adapter = new RecyclerViewAdapter(SecondActivity.this, companiesList, principal);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(SecondActivity.this));
                 double highestProfit = highestProfit();
                 tvRevenue.setText(String.valueOf(decimalFormat.format(highestProfit)));
             }
+
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
@@ -92,15 +93,15 @@ public class SecondActivity extends AppCompatActivity {
         super.onStart();
 
     }
-    
+
     //To activate the menu on this activity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater= getMenuInflater();
-        inflater.inflate(R.menu.main_menu,menu);
-        /**
-         * Associate searchable configuration with the SearchView         *
-         */
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+
+        //Associate searchable configuration with the SearchView         *
+
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.findItem(R.id.action_search)
                 .getActionView();
@@ -108,9 +109,9 @@ public class SecondActivity extends AppCompatActivity {
                 .getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
 
-        /**
-         * listening to search query text change
-         */
+
+        //listening to search query text change
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -132,15 +133,15 @@ public class SecondActivity extends AppCompatActivity {
 
     // A temporary method to move to next activity
     public void moveNext(View view) {
-        startActivity(new Intent(this,ThirdActivity.class));
+        startActivity(new Intent(this, ThirdActivity.class));
     }
 
     // A method for the menu options
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.about_us_id:
-                Intent intent = new Intent(this,AboutUs.class);
+                Intent intent = new Intent(this, AboutUs.class);
 
                 startActivity(intent);
                 break;
@@ -161,25 +162,26 @@ public class SecondActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    public Company getCompany(){
+    public Company getCompany() {
         return null;
 
     }
 
     /**
      * Compares estimated profit from all companies.
+     *
      * @return The highest profit
      */
-    public double highestProfit(){
+    public double highestProfit() {
         double profit;
-        double higherProfit=-Double.MIN_VALUE;
+        double higherProfit = -Double.MIN_VALUE;
 
-        for(Company company:companiesList){
+        for (Company company : companiesList) {
             ArrayList<Double> annualPerformance = past12MonthsDataForACompany(company);
-            profit=profitCalculation(annualPerformance);
+            profit = profitCalculation(annualPerformance);
             past12MonthsDataForACompany(company).clear();
-            if(profit>higherProfit){
-                higherProfit=profit;
+            if (profit > higherProfit) {
+                higherProfit = profit;
             }
         }
         return higherProfit;
@@ -187,43 +189,45 @@ public class SecondActivity extends AppCompatActivity {
 
     /**
      * Collates the most recent 12 months data
+     *
      * @param company Selected company
      * @return List of 12 data points
      */
-    private ArrayList<Double> past12MonthsDataForACompany(Company company){
-        int currentYear=Calendar.getInstance().get(Calendar.YEAR);
-        int monthsFromCurrentYear=Calendar.getInstance().get(Calendar.MONTH);
-        int monthsFromLastYear=12-monthsFromCurrentYear;
-        ArrayList<Double> data=new ArrayList<>();
+    private ArrayList<Double> past12MonthsDataForACompany(Company company) {
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        int monthsFromCurrentYear = Calendar.getInstance().get(Calendar.MONTH);
+        int monthsFromLastYear = 12 - monthsFromCurrentYear;
+        ArrayList<Double> data = new ArrayList<>();
 
-        for(int i=monthsFromLastYear; i>0;i--){
-            int j=12-i;
-            data.add(company.performance().get(currentYear-1).get(j));
+        for (int i = monthsFromLastYear; i > 0; i--) {
+            int j = 12 - i;
+            data.add(company.performance().get(currentYear - 1).get(j));
         }
-        for(int i=0; i<monthsFromCurrentYear;i++){
+        for (int i = 0; i < monthsFromCurrentYear; i++) {
             data.add(company.performance().get(currentYear).get(i));
         }
-       return data;
+        return data;
     }
 
     /**
      * Calculates an estimated year's profit, using simple linear regression, from each company
+     *
      * @param data Latest 12 months data
      * @return Estimated profit
      */
-    private double profitCalculation(ArrayList<Double> data){
+    private double profitCalculation(ArrayList<Double> data) {
         SimpleRegression recentYearData = new SimpleRegression();
         double slope;
         double intercept;
 
-        for(int i=0;i<data.size();i++){
-            int j=11-i;
-            double[][]dataPoints={{i,data.get(j)}};
+        for (int i = 0; i < data.size(); i++) {
+            int j = 11 - i;
+            double[][] dataPoints = {{i, data.get(j)}};
             recentYearData.addData(dataPoints);
         }
-        intercept=recentYearData.getIntercept();
-        slope=recentYearData.getSlope();
+        intercept = recentYearData.getIntercept();
+        slope = recentYearData.getSlope();
 
-        return (principal/100)*((12*slope)+intercept);
+        return (principal / 100) * ((12 * slope) + intercept);
     }
 }

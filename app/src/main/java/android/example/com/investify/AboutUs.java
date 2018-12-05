@@ -11,12 +11,16 @@ public class AboutUs extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.left_entry,R.anim.left_exit);
+        overridePendingTransition(R.anim.left_entry, R.anim.left_exit);
 
         setContentView(R.layout.activity_about_us);
     }
-    /** open the developers Linkedin profile upon tapping on her/his name
-    */
+
+    /**
+     * Links LinkedIn profile with individual's name
+     *
+     * @param v
+     */
     public void onClick(View v) {
         String profileLink = null;
 
