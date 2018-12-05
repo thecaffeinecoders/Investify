@@ -91,6 +91,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/edittext_bg"
+        android:maxLength="10"
         android:ems="10"
         android:fontFamily="@font/bungee"
         android:gravity="center|center"
