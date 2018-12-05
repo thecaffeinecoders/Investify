@@ -3,8 +3,8 @@
     <string name="investify">Investify</string>
     <string name="amount_you_want_to_invest">Amount you want to invest</string>
     <string name="check_possible_profits">Projected profits</string>
-    <string name="estimated_profit">Estimated Profit</string>
-    <string name="year">Year</string>
+    <string name="estimated_profit">Estimated Profit*</string>
+    <string name="year">Year(s)</string>
     <string name="chart_desc">The company performance chart</string>
     <string name="about_asset">About asset management firms</string>
     <string name="what_are">What are asset management firms ?</string>
@@ -14,7 +14,7 @@
     <string name="search_hint">Search the company name...</string>
     <string name="search_title">Search</string>
     <string name="yourInvestment">Your investment:\u00A0</string>
-    <string name="profit">Profit:\u00A0</string>
+    <string name="profit">Profit*:\u00A0</string>
     <string name="about_us">About us  </string>
     <string name="the_caffeine_coders_team">The Caffeine coders team</string>
     <string name="dima_alissa">Dima Alissa</string>
@@ -23,7 +23,8 @@
     <string name="tamer_alnoami">Tamer Alnoami</string>
     <string name="chen_zhi">Zhi Chen</string>
     <string name="adem_sezer">Adem Sezer</string>
-    <string name="all_profits">* All profits shown in this application are calculated for a 12-months investment period .</string>
+    <string name="all_profits">* All estimated profits shown in this application are calculated for a 12-months investment period .</string>
+    <string name="instruction">Select year(s) for basis of calculation</string>
 
     <string-array name="spinner_content">
         <item>1</item>

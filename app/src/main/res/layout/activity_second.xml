@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:background="#ECEFF1">
+            android:background="#5472d3">
 
             <TextView
                 android:id="@+id/tv_valueTitle"
@@ -28,7 +28,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/yourInvestment"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:textSize="24sp" />
 
             <TextView
@@ -38,8 +38,9 @@
                 android:layout_toRightOf="@id/tv_valueTitle"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 android:layout_marginLeft="8dp"/>
 
             <TextView
@@ -53,7 +54,7 @@
                 android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/profit"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:textSize="24sp" />
 
             <TextView
@@ -66,7 +67,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@id/tv_whatIsProfit"
                 android:fontFamily="sans-serif"
-                android:textColor="#000"
+                android:textColor="#fff"
+                android:textStyle="bold"
                 android:textSize="24sp" />
 
         </RelativeLayout>

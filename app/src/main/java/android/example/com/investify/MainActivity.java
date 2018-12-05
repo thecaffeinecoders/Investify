@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.VideoView;
 
-import org.apache.commons.math3.stat.regression.SimpleRegression;
-
 public class MainActivity extends AppCompatActivity {
 
     private VideoView mVideoView;
@@ -18,16 +16,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.left_entry,R.anim.left_exit);
+        overridePendingTransition(R.anim.left_entry, R.anim.left_exit);
 
         setContentView(R.layout.activity_main);
-
-        /**
-         * Background Video
-         */
+        //Background Video
         mVideoView = (VideoView) findViewById(R.id.bgVideoView);
 
-        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.investfy);
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.investfy);
 
         mVideoView.setVideoURI(uri);
         mVideoView.start();
@@ -51,13 +46,14 @@ public class MainActivity extends AppCompatActivity {
     // A temporary method to move to next activity
     public void moveNext(View view) {
         double principal = readPrincipal(findViewById(R.id.teAmountEnteredToInvest));
-        Intent intent = new Intent(this,SecondActivity.class);
+        Intent intent = new Intent(this, SecondActivity.class);
         intent.putExtra("Principal", principal);
         startActivity(intent);
     }
 
     /**
      * Takes value user inputs for computational use
+     *
      * @param view Takes in String from specified View
      * @return Integer value
      */
@@ -71,8 +67,9 @@ public class MainActivity extends AppCompatActivity {
             return 0;
         }
     }
+
     //Show information activity
-    public void showInfo (View iview){
-        startActivity (new Intent(this,Information.class));
+    public void showInfo(View iview) {
+        startActivity(new Intent(this, Information.class));
     }
 }
