@@ -43,7 +43,7 @@ public class SecondActivity extends AppCompatActivity {
         this.principal = getIntent().getDoubleExtra("Principal", 0);
         TextView tvInvested = (TextView) findViewById(R.id.tv_valueOfInvestment);
         final TextView tvRevenue = (TextView) findViewById(R.id.et_maxProfit);
-        tvInvested.setText(String.valueOf(decimalFormat.format(principal)));
+        tvInvested.setText(String.valueOf(String.format("%.0f",principal)));
 
         //Eventlistener is related to the database reference
         //Waits for values to change before method is activated
@@ -78,7 +78,8 @@ public class SecondActivity extends AppCompatActivity {
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(SecondActivity.this));
                 double highestProfit = highestProfit();
-                tvRevenue.setText(String.valueOf(decimalFormat.format(highestProfit)));
+                //tvRevenue.setText(String.valueOf(decimalFormat.format(highestProfit)));
+                tvRevenue.setText(String.format( "%.2f", highestProfit));
             }
 
             @Override

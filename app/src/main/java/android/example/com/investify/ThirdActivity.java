@@ -62,9 +62,9 @@ public class ThirdActivity extends AppCompatActivity {
         // Get the company object from second activity,
         // it is sent as an object it should be getSerializableExtra
         selectedCompany = (Company) i.getSerializableExtra("company");
+
         this.amount = i.getDoubleExtra("Principal", 0);
-        TextView tvComName = (TextView) findViewById(R.id.tvComName);
-        tvComName.setText(selectedCompany.name);
+
         ImageView imgCompLogo = (ImageView) findViewById(R.id.imgCompLogo); // Company Logo ImageView
         Glide.with(this).asBitmap().load(selectedCompany.logoLInk).apply(fitCenterTransform()).into(imgCompLogo); // Load the image
 
@@ -81,6 +81,7 @@ public class ThirdActivity extends AppCompatActivity {
         threeYear = (RadioButton) findViewById(R.id.rbThreeYear);
         fiveYear = (RadioButton) findViewById(R.id.rbFiveYear);
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+
         oneYear.setText(String.valueOf(currentYear - 1));
         threeYear.setText(String.valueOf(currentYear - 3) + " - " + String.valueOf((currentYear - 1)));
         fiveYear.setText(String.valueOf(currentYear - 5) + " - " + String.valueOf((currentYear - 1)));
@@ -88,7 +89,9 @@ public class ThirdActivity extends AppCompatActivity {
         Button mButton = (Button) findViewById(R.id.btnWebView);
         mButton.setText("Visit " + selectedCompany.name);
 
-        //Calls thechartDisplay() based on user choice to draw chart points and line
+        /**
+         * A method to call the chartDisplay() based on the selected year option to draw the chart points and line
+         */
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -357,15 +360,15 @@ public class ThirdActivity extends AppCompatActivity {
             int choice = Integer.valueOf(parent.getSelectedItem().toString());
             switch (pos) {
                 case 0:
-                    tv.setText(String.valueOf(decimalFormat.format(profitEstimateBasedOnPast12Months())));
+                    tv.setText(String.valueOf(String.format( "%.2f", profitEstimateBasedOnPast12Months())));
                     break;
 
                 case 1:
-                    tv.setText(String.valueOf(decimalFormat.format(yearEstimateBasedOnVaryingMonths(choice))));
+                    tv.setText(String.valueOf(String.format( "%.2f", yearEstimateBasedOnVaryingMonths(choice))));
                     break;
 
                 case 2:
-                    tv.setText(String.valueOf(decimalFormat.format(yearEstimateBasedOnVaryingMonths(choice))));
+                    tv.setText(String.valueOf(String.format( "%.2f", yearEstimateBasedOnVaryingMonths(choice))));
                     break;
             }
         }
