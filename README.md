@@ -1,3 +1,5 @@
+![The Caffeine Coders](TheCaffeineCoders.png)
+
 #  Investify
 
 **Investify Project = Investify App + InvestifyBackend App**
