@@ -24,7 +24,7 @@
 
 # UX
 
--   Create an easy-to-use app with minimal user input
+-   easy-to-use with minimal user input
     
 -   Visual aid such as charts and information button
     
