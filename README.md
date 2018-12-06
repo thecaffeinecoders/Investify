@@ -2,9 +2,9 @@
 
 **Investify** is an Android app that is designed to be a gateway for users to invest in asset management firms .
 
+#### @version v1.0
 
-
-# FUNCTIONALITY
+## Functionality
 
 -   Fetch data from websites
     
@@ -22,10 +22,21 @@
     
 -   Provide an introductory read on Asset Management Firms.
 
-# UX
+## UX
 
 -   Easy-to-use with minimal user input
     
 -   Visual aid such as charts and information button
     
 -   Scrollable page for readability
+
+## Authors
+
+**The Caffeine Coders** - [theCaffeineCoders](https://github.com/thecaffeinecoders)
+
+* **Adem Sezer** - *Initial work* - [adam2adam](https://github.com/adam2adam)
+* **Dima Alissa** - *Initial work* - [Dima-alissa](https://github.com/Dima-alissa)
+* **Hossin Algerf** - *Initial work* - [Hossin-Algerf](https://github.com/Hossin-Algerf)
+* **Radhika Jram** - *Initial work* - [Radhikajram](https://github.com/Radhikajram)
+* **Tamer Noami** - *Initial work* - [TamerNoami](https://github.com/TamerNoami)
+* **Zhi Chen CZ** - *Initial work* - [ZhiChenCZ](https://github.com/ZhiChenCZ)
