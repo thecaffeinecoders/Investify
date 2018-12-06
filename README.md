@@ -24,7 +24,7 @@
 
 # UX
 
--   easy-to-use with minimal user input
+-   Easy-to-use with minimal user input
     
 -   Visual aid such as charts and information button
     
