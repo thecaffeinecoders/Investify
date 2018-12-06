@@ -117,7 +117,7 @@ public class ThirdActivity extends AppCompatActivity {
         SpinnerOnItemSelectedListener listener = new SpinnerOnItemSelectedListener();
         spinner.setOnItemSelectedListener(listener);
 
-        //
+        
         scrollViewPage = (ScrollView) findViewById(R.id.scrollViewPage);
         scrollViewPage.setOnTouchListener(new View.OnTouchListener() {
 
@@ -388,17 +388,14 @@ public class ThirdActivity extends AppCompatActivity {
             int choice = Integer.valueOf(parent.getSelectedItem().toString());
             switch (pos) {
                 case 0:
-                    //tv.setText(String.valueOf(decimalFormat.format(profitEstimateBasedOnPast12Months())));
                     tv.setText(String.valueOf(String.format( "%.2f", profitEstimateBasedOnPast12Months())));
                     break;
 
                 case 1:
-                    //tv.setText(String.valueOf(decimalFormat.format(yearEstimateBasedOnVaryingMonths(choice))));
                     tv.setText(String.valueOf(String.format( "%.2f", yearEstimateBasedOnVaryingMonths(choice))));
                     break;
 
                 case 2:
-                    //tv.setText(String.valueOf(decimalFormat.format(yearEstimateBasedOnVaryingMonths(choice))));
                     tv.setText(String.valueOf(String.format( "%.2f", yearEstimateBasedOnVaryingMonths(choice))));
                     break;
             }
