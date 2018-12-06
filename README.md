@@ -3,6 +3,7 @@
 **Investify** is an Android app that is designed to be a gateway for users to invest in asset management firms .
 
 
+
 # FUNCTIONALITY
 
 -   Fetch data from websites
