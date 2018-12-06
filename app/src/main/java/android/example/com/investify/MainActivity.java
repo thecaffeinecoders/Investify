@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
                 mediaPlayer.setLooping(true);
             }
         });
+
+        //EditText editTextAmount = (EditText) findViewById(R.id.teAmountEnteredToInvest);
+        //editTextAmount.addTextChangedListener(new NumberTextWatcher(editTextAmount, "#,###"));
     }
 
     // For VideoView

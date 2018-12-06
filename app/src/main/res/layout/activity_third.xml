@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollViewPage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
@@ -65,8 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
-            android:id="@+id/rgYearChoice"
-            >
+            android:id="@+id/rgYearChoice">
 
             <RadioButton
                 android:id="@+id/rbOneYear"
@@ -93,8 +93,7 @@
         </RadioGroup>
     </LinearLayout>
 
-
-        <LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:orientation="vertical">
@@ -103,13 +102,14 @@
             android:id="@+id/tvProfitDesc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="top"
             android:text="@string/instruction"
-            android:textColor="@android:color/holo_blue_dark"
             android:textAlignment="center"
+            android:textColor="@android:color/holo_blue_dark"
             android:textSize="18sp"
             android:textStyle="italic" />
-    </LinearLayout>
 
+    </LinearLayout>
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -173,7 +173,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="12dp"
                 android:layout_toStartOf="@+id/tvEstimatedProfit"
                 android:layout_toLeftOf="@+id/tvEstimatedProfit"
                 android:layout_weight="1"
@@ -193,7 +193,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:layout_weight="2"
                 android:gravity="center"
                 android:hint="profit"
@@ -205,13 +205,9 @@
 
             <TextView
                 android:id="@+id/tvAboutComp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginBottom="5dp"
                 android:text="About Company"
                 android:textAlignment="center"
                 android:textColor="@android:color/holo_blue_dark"
