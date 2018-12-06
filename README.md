@@ -3,7 +3,7 @@
 **Investify Project = Investify App + InvestifyBackend App**
 
 * **Investify** is an Android app that is designed to be a gateway for users to invest in asset management firms.
-* **InvestifyBackEnd** is an Android app used by developers to take care of data fetching ,processing and then writing into Firebase.
+* **InvestifyBackEnd** is an Android app used by developers to take care of data fetching ,processing and then writing into Firebase.  
 *[InvestifyBackend](https://github.com/thecaffeinecoders/InvestifyBackEnd)
 
 #### @version v1.0
