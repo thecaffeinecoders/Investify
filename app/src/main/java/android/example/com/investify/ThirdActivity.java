@@ -8,6 +8,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +41,7 @@ public class ThirdActivity extends AppCompatActivity {
 
     public Company selectedCompany;
     List<Double> values = new ArrayList<>();
+    ScrollView scrollViewPage;
     RadioGroup radioGroup;
     RadioButton oneYear;
     RadioButton threeYear;
@@ -110,6 +113,31 @@ public class ThirdActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
         SpinnerOnItemSelectedListener listener = new SpinnerOnItemSelectedListener();
         spinner.setOnItemSelectedListener(listener);
+
+        //
+        scrollViewPage = (ScrollView) findViewById(R.id.scrollViewPage);
+        scrollViewPage.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                tvCompDesc.getParent().requestDisallowInterceptTouchEvent(false);
+
+                return false;
+            }
+        });
+
+        tvCompDesc.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                tvCompDesc.getParent().requestDisallowInterceptTouchEvent(true);
+
+                return false;
+            }
+        });
+        //
     }
 
     /**
@@ -357,15 +385,18 @@ public class ThirdActivity extends AppCompatActivity {
             int choice = Integer.valueOf(parent.getSelectedItem().toString());
             switch (pos) {
                 case 0:
-                    tv.setText(String.valueOf(decimalFormat.format(profitEstimateBasedOnPast12Months())));
+                    //tv.setText(String.valueOf(decimalFormat.format(profitEstimateBasedOnPast12Months())));
+                    tv.setText(String.valueOf(String.format( "%.2f", profitEstimateBasedOnPast12Months())));
                     break;
 
                 case 1:
-                    tv.setText(String.valueOf(decimalFormat.format(yearEstimateBasedOnVaryingMonths(choice))));
+                    //tv.setText(String.valueOf(decimalFormat.format(yearEstimateBasedOnVaryingMonths(choice))));
+                    tv.setText(String.valueOf(String.format( "%.2f", yearEstimateBasedOnVaryingMonths(choice))));
                     break;
 
                 case 2:
-                    tv.setText(String.valueOf(decimalFormat.format(yearEstimateBasedOnVaryingMonths(choice))));
+                    //tv.setText(String.valueOf(decimalFormat.format(yearEstimateBasedOnVaryingMonths(choice))));
+                    tv.setText(String.valueOf(String.format( "%.2f", yearEstimateBasedOnVaryingMonths(choice))));
                     break;
             }
         }
