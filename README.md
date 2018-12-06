@@ -1,4 +1,4 @@
-#  Investify Project
+#  Investify
 
 **Investify Project = Investify App + InvestifyBackend App**
 
